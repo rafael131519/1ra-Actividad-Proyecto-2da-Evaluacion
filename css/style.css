@@ -1,0 +1,111 @@
+/* =========================================
+   SKATESET TOKYO - CSS OPTIMIZADO
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap');
+
+:root {
+    --bg-page: #0A0E14; --bg-card: #1C2128; --text-main: #E6EDF3;
+    --text-muted: #8B949E; --cyber-blue: #00A8FF; --neo-magenta: #FF0055;
+    --voltage-lime: #D4FF00; --box-placeholder: #161b22;
+    --font-heading: 'Rajdhani', sans-serif; --font-body: 'Roboto Mono', monospace;
+}
+
+/* BASE & RESET */
+body {
+    font-family: var(--font-body); background-color: var(--bg-page); color: var(--text-main);
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+a { text-decoration: none; color: inherit; transition: .2s; }
+img { filter: contrast(1.1) grayscale(20%); }
+
+/* COMPONENTES VISUALES */
+.box-gray { 
+    background: var(--box-placeholder) center/cover no-repeat;
+    width: 100%; height: 100%; min-height: 200px; display: block;
+    border: 1px solid #30363d; position: relative;
+    transition: transform .4s ease, filter .3s;
+}
+.box-gray::after { /* Triángulo Decorativo */
+    content: ''; position: absolute; top: 0; left: 0; width: 10px; height: 10px; 
+    border-top: 2px solid var(--cyber-blue); border-left: 2px solid var(--cyber-blue);
+}
+.card .box-gray { background-size: contain; background-color: #0d1117; padding: 10px; }
+.circle-gray { 
+    background: var(--bg-card) center/cover; border: 1px solid var(--text-muted);
+    border-radius: 50%; width: 50px; height: 50px; 
+}
+
+/* BOOTSTRAP OVERRIDES */
+/* Botones Neón */
+.btn { 
+    padding: 12px 25px; border-radius: 0 !important; border: none;
+    font: 700 1rem var(--font-heading); letter-spacing: 2px; text-transform: uppercase;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); 
+}
+.btn-primary { 
+    background-color: var(--voltage-lime); color: #000; 
+    box-shadow: 0 0 15px rgba(212, 255, 0, 0.4); 
+}
+.btn-primary:hover, .btn-primary:active { 
+    background-color: #fff !important; color: #000 !important;
+    box-shadow: 0 0 25px rgba(212, 255, 0, 0.8); transform: translateY(-2px);
+}
+.btn-outline { 
+    border: 1px solid var(--cyber-blue); background: transparent; color: var(--cyber-blue); clip-path: none; 
+}
+.btn-outline:hover { 
+    background: var(--cyber-blue); color: #000; box-shadow: 0 0 15px var(--cyber-blue);
+}
+
+/* Tipografía */
+h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
+    font-family: var(--font-heading); color: var(--text-main); 
+    font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+}
+h1 { font-size: 3.5rem; line-height: 0.9; }
+
+/* Navbar */
+.navbar { background: rgba(10,14,20,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #30363d; }
+.navbar-brand { font-size: 1.8rem; font-weight: 900; color: #fff !important; text-shadow: 0 0 10px var(--cyber-blue); }
+.nav-link { color: var(--text-muted) !important; font-size: 0.9rem; transition: .3s; }
+.nav-link:hover { color: var(--cyber-blue) !important; text-shadow: 0 0 8px var(--cyber-blue); }
+.navbar-toggler-icon { filter: invert(1); }
+
+/* Cards & Efectos */
+.card { 
+    background: var(--bg-card); border: 1px solid #30363d; border-radius: 0;
+    transition: .3s; overflow: hidden;
+}
+.card:hover { 
+    transform: translateY(-5px); border-color: var(--neo-magenta);
+    box-shadow: 0 0 20px rgba(255, 0, 85, 0.2); 
+}
+
+/* UNIFICACIÓN DE ANIMACIONES (La parte que más espacio ahorra) */
+.story-img-large, .side-img { border: 1px solid #30363d; transition: transform .4s ease, filter .3s; }
+
+/* Aquí agrupamos TODAS las cosas que hacen zoom al pasar el ratón */
+.card:hover .box-gray, 
+.card:hover .card-img,
+.main-story:hover .story-img-large,
+.side-stories article:hover .side-img { 
+    filter: contrast(1.1) grayscale(0%) !important; 
+    transform: scale(1.03); 
+} 
+
+/* Extras & Grid Hero */
+.dot { color: var(--neo-magenta); } 
+.price { color: var(--cyber-blue); font-size: 1.2rem; font-weight: bold; }
+.hero-content p { border-left: 2px solid var(--neo-magenta); padding-left: 15px; }
+
+.hero-images-grid {
+    display: grid; grid-template-columns: 1.5fr 1fr; grid-template-rows: 250px 200px; gap: 15px;
+}
+.img-large { grid-row: 1 / -1; grid-column: 1 / 2; } 
+.img-small-1 { grid-column: 2 / 3; } .img-small-2 { grid-column: 2 / 3; }
+
+@media (max-width: 992px) { 
+    h1 { font-size: 3rem; } .hero-images-grid { display: none; } 
+}
