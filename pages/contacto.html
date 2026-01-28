@@ -7,18 +7,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        /* Limpiamos los links de la caja gris para que no tengan color ni subrayado */
-        .box-gray a {
-            text-decoration: none !important;
-            color: inherit !important;
-            display: block;
-            margin-bottom: 5px;
-        }
-        /* Ajuste para asegurar simetría visual en el encabezado de contacto */
+        /* 1. Eliminamos el borde inferior que creaba la línea roja larga */
         .contact-header {
             display: inline-block;
-            border-bottom: 2px solid var(--neo-magenta);
+            border-bottom: none !important; 
             margin-bottom: 1.5rem;
+        }
+
+        /* 2. Definimos el color rojo para la pequeña línea vertical decorativa */
+        .border-red-custom {
+            border-left: 3px solid #ff0000 !important; /* Rojo puro */
         }
     </style>
 </head>
@@ -48,7 +46,7 @@
                     <h1 class="mb-0">CONTACTO</h1>
                 </div>
                 
-                <p class="text-muted border-start border-primary ps-3 mb-5">
+                <p class="text-muted border-start border-red-custom ps-3 mb-5">
                     Estableciendo enlace seguro con el distrito de Shibuya. Tiempo de respuesta estimado: <span style="color: var(--voltage-lime);">Sub-6 horas</span>.
                 </p>
 
@@ -64,43 +62,45 @@
             </div>
 
            <div class="col-lg-7">
-    <div class="card p-4 p-md-5 h-100">
-        <h2 class="h3 mb-4 text-uppercase">Contactanos</h2>
-        <form action="#" class="h-100 d-flex flex-column justify-content-between">
-            <div class="row g-4"> <div class="col-12">
-                    <label class="form-label small text-muted">ALIAS DEL OPERADOR (NOMBRE Y APELLIDOS)</label>
-                    <input type="text" class="form-control bg-transparent border-secondary text-white rounded-0" placeholder="Ej. CyberSkater_88">
-                </div>
+                <div class="card p-4 p-md-5 h-100">
+                    <h2 class="h3 mb-4 text-uppercase">Contactanos</h2>
+                    <form action="#" class="h-100 d-flex flex-column justify-content-between">
+                        <div class="row g-4"> 
+                            <div class="col-12">
+                                <label class="form-label small text-muted">ALIAS DEL OPERADOR (NOMBRE Y APELLIDOS)</label>
+                                <input type="text" class="form-control bg-transparent border-secondary text-white rounded-0" placeholder="Ej. CyberSkater_88">
+                            </div>
 
-                <div class="col-12">
-                    <label class="form-label small text-muted">CANAL DE RESPUESTA (EMAIL)</label>
-                    <input type="email" class="form-control bg-transparent border-secondary text-white rounded-0" placeholder="nombre@net.com">
-                </div>
+                            <div class="col-12">
+                                <label class="form-label small text-muted">CANAL DE RESPUESTA (EMAIL)</label>
+                                <input type="email" class="form-control bg-transparent border-secondary text-white rounded-0" placeholder="nombre@net.com">
+                            </div>
 
-                <div class="col-12">
-                    <label class="form-label small text-muted">PRIORIDAD</label>
-                    <select class="form-select bg-transparent border-secondary text-gray rounded-0">
-                        <option selected>Consulta General</option>
-                        <option value="1">Soporte Técnico Gear</option>
-                        <option value="2">Colaboración / Media</option>
-                        <option value="3">Urgente / Fallo en Hardware</option>
-                    </select>
-                </div>
+                            <div class="col-12">
+                                <label class="form-label small text-muted">PRIORIDAD</label>
+                                <select class="form-select bg-transparent border-secondary text-gray rounded-0">
+                                    <option selected>Consulta General</option>
+                                    <option value="1">Soporte Técnico Gear</option>
+                                    <option value="2">Colaboración / Media</option>
+                                    <option value="3">Urgente / Fallo en Hardware</option>
+                                </select>
+                            </div>
 
-                <div class="col-12">
-                    <label class="form-label small text-muted">COMENTARIOS</label>
-                    <textarea class="form-control bg-transparent border-secondary text-white rounded-0" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+                            <div class="col-12">
+                                <label class="form-label small text-muted">COMENTARIOS</label>
+                                <textarea class="form-control bg-transparent border-secondary text-white rounded-0" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary w-100 py-3 text-uppercase fw-bold">
+                                EJECUTAR ENVÍO <span class="ms-2">>></span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-
-            <div class="mt-4">
-                <button type="submit" class="btn btn-primary w-100 py-3 text-uppercase fw-bold">
-                    EJECUTAR ENVÍO <span class="ms-2">>></span>
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
     </main>
 
     <footer class="py-5 border-top border-secondary mt-5">
