@@ -5,37 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkateSet | Tokyo Edition</title>
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+
+<body class="bg-dark-custom"> 
 
     <header class="main-header sticky-top">
-        <nav class="navbar navbar-expand-lg py-4">
+        <nav class="navbar navbar-expand-lg py-4" style="background: rgba(10,14,20,0.9); backdrop-filter: blur(10px);">
             <div class="container">
-                <a class="navbar-brand logo text-white me-5" href="#">SKATESET<span class="dot">.</span></a>
-
-                <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-                    <span class="navbar-toggler-icon"></span> 
-                </button>
-
+                <a class="navbar-brand logo text-white me-5 cyber-title fw-bold fs-3" href="#">SKATESET<span class="text-neon">.</span></a>
+                <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-lg-4 text-uppercase fw-bold">
                         <li class="nav-item"><a class="nav-link text-secondary hover-white" href="pages/setup.html">Setup</a></li>
                         <li class="nav-item"><a class="nav-link text-secondary hover-white" href="pages/contacto.html">Contacto</a></li>
                         <li class="nav-item"><a class="nav-link text-secondary hover-white" href="#">Decks</a></li>
-                        <li class="nav-item sale-link"><a class="nav-link" href="#">SALE %</a></li>
+                        <li class="nav-item sale-link"><a class="nav-link text-neon" href="#">SALE %</a></li>
                     </ul>
-
                     <div class="header-actions d-flex align-items-center gap-3 mt-3 mt-lg-0">
                         <i class="fa-solid fa-magnifying-glass search-icon text-white"></i>
-                        <a href="#" class="btn btn-outline btn-sm">LOGIN</a>
+                        <a href="#" class="btn btn-outline-neon btn-sm">LOGIN</a>
                     </div>
                 </div>
             </div>
@@ -43,144 +35,81 @@
     </header>
 
     <main>
-        <section class="hero py-5 border-bottom border-secondary">
+        <section class="hero py-5 border-bottom border-secondary" style="border-color: rgba(255,255,255,0.1) !important;">
             <div class="container">
                 <div class="row align-items-start gy-5">
                     <div class="col-lg-6 hero-content">
-                        <h1 class="display-3 fw-bold mb-4 text-white">DOMINA EL<br><span class="text-highlight">ASFALTO</span></h1>
-                        <p class="mb-5 fs-5 text-secondary hero-desc">Setup profesional para Street técnico. Estética nocturna. Rendimiento puro diseñado en Tokyo.</p>
-                        <a href="pages/setup.html" class="btn btn-primary btn-lg py-3 px-5">CONFIGURAR SETUP</a>
+                        <h1 class="display-3 fw-bold mb-4 text-white cyber-title">DOMINA EL<br><span class="text-neon">ASFALTO</span></h1>
+                        <p class="mb-5 fs-5 text-secondary section-step border-0 ps-0">Setup profesional para Street técnico. Estética nocturna. Rendimiento puro diseñado en Tokyo.</p>
+                        <a href="pages/setup.html" class="btn btn-outline-neon btn-lg py-3 px-5 fw-bold">CONFIGURAR SETUP</a>
                     </div>
-                    
                     <div class="col-lg-6">
-                        <div class="hero-images-grid">
-                            <div class="img-large box-gray" style="background-image: url('img/Gemini_Generated_Image_bgq8z9bgq8z9bgq8.png');"></div> 
-                            <div class="img-small-1 box-gray" style="background-image: url('img/Gemini_Generated_Image_emm6xsemm6xsemm6.png');"></div>
-                            <div class="img-small-2 box-gray" style="background-image: url('img/Gemini_Generated_Image_iudv9wiudv9wiudv.png');"></div>
+                        <div style="display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 15px; height: 450px;">
+                            <div class="border border-secondary position-relative" style="grid-row: 1 / 3; background: url('img/Gemini_Generated_Image_bgq8z9bgq8z9bgq8.png') center/cover no-repeat;">
+                                <div class="corner-accent"></div>
+                            </div>
+                            <div class="border border-secondary" style="background: url('img/Gemini_Generated_Image_emm6xsemm6xsemm6.png') center/cover no-repeat;"></div>
+                            <div class="border border-secondary position-relative" style="background: url('img/Gemini_Generated_Image_iudv9wiudv9wiudv.png') center/cover no-repeat;">
+                                <div class="corner-accent-bottom"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="destinations py-5 border-bottom border-secondary">
-    <div class="container">
-        <div class="section-header d-flex justify-content-between align-items-end flex-wrap mb-5">
-            <h2 class="text-white m-0">STREET ARSENAL</h2>
-            <div class="filters d-none d-md-flex gap-3 text-muted text-uppercase small fw-bold align-items-center">
-                <span class="text-white border-bottom border-2 border-primary">Street</span>
-                <span>Park</span>
-                <span>Cruiser</span>
-                <a href="#" class="btn btn-outline btn-sm ms-3">Ver todo</a>
-            </div>
-        </div>
-        
-        <div class="row g-5">
-            <div class="col-12 col-md-6 col-lg-3">
-                <article class="card h-100 bg-dark border-secondary">
-                    <div class="overflow-hidden"> 
-                        <div class="card-img box-gray" style="background-image: url('img/Gemini_Generated_Image_s3b33is3b33is3b3.png'); height: 280px;"></div>
-                    </div>
-                    <div class="card-info-box p-4 d-flex flex-column h-200">
-                        <h3 class="h5 text-white">Element 8.0"</h3>
-                        <p class="text-muted small mb-3">Maple Canadiense</p>
-                        <div class="price fw-bold mt-auto">55.00€</div>
-                    </div>
-                </article>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <article class="card h-100 bg-dark border-secondary">
-                    <div class="overflow-hidden">
-                        <div class="card-img box-gray" style="background-image: url('img/Gemini_Generated_Image_sglgr9sglgr9sglg.png'); height: 280px;"></div>
-                    </div>
-                    <div class="card-info-box p-4 d-flex flex-column h-200">
-                        <h3 class="h5 text-white">Indy Hollow</h3>
-                        <p class="text-muted small mb-3">Titanium 149mm</p>
-                        <div class="price fw-bold mt-auto">72.00€</div>
-                    </div>
-                </article>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <article class="card h-100 bg-dark border-secondary">
-                    <div class="overflow-hidden">
-                        <div class="card-img box-gray" style="background-image: url('img/Gemini_Generated_Image_3ah7ld3ah7ld3ah7.png'); height: 280px;"></div>
-                    </div>
-                    <div class="card-info-box p-4 d-flex flex-column h-200">
-                        <h3 class="h5 text-white">Spitfire F4</h3>
-                        <p class="text-muted small mb-3">Conical 52mm 99a</p>
-                        <div class="price fw-bold mt-auto">45.00€</div>
-                    </div>
-                </article>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <article class="card h-100 bg-dark border-secondary">
-                    <div class="overflow-hidden">
-                        <div class="card-img box-gray" style="background-image: url('img/Gemini_Generated_Image_sj60dusj60dusj60.png'); height: 280px;"></div>
-                    </div>
-                    <div class="card-info-box p-4 d-flex flex-column h-200">
-                        <h3 class="h5 text-white">Bones Swiss</h3>
-                        <p class="text-muted small mb-3">Ceramic Bearings</p>
-                        <div class="price fw-bold mt-auto">85.00€</div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </div>
-</section>
-
-        <section class="latest-stories py-5 border-bottom border-secondary bg-transparent">
+        <section class="destinations py-5 border-bottom border-secondary" style="border-color: rgba(255,255,255,0.1) !important;">
             <div class="container">
-                <div class="section-header d-flex justify-content-between align-items-end mb-5">
-                    <h2 class="text-white m-0">TOKYO FILES</h2>
-                    <a href="#" class="btn btn-outline">LEER BLOG</a>
+                <div class="d-flex justify-content-between align-items-end flex-wrap mb-5">
+                    <h2 class="text-white m-0 cyber-title fw-bold">STREET ARSENAL</h2>
+                    <div class="d-none d-md-flex gap-3 text-muted text-uppercase small fw-bold align-items-center">
+                        <span class="text-neon border-bottom border-2 border-info">Street</span><span>Park</span><span>Cruiser</span>
+                        <a href="#" class="btn btn-outline-neon btn-sm ms-3">Ver todo</a>
+                    </div>
                 </div>
+                <div class="row g-4">
+                    <div class="col-12 col-md-6 col-lg-3"><div class="product-card-only-img w-100 card-static"><div class="card-inner"><div class="card-front"><div class="product-img-wrapper"><img src="img/Gemini_Generated_Image_s3b33is3b33is3b3.png" alt="Element"><div class="corner-accent"></div></div></div><div class="card-back"><div class="p-4 d-flex flex-column justify-content-center align-items-center text-center h-100"><h3 class="fw-bold text-uppercase text-white h5 mb-1">Element 8.0"</h3><p class="small text-muted mb-3">Maple Canadiense</p><div class="fw-bold fs-5 text-neon">55.00€</div><div class="corner-accent-bottom"></div></div></div></div></div></div>
+                    <div class="col-12 col-md-6 col-lg-3"><div class="product-card-only-img w-100 card-static"><div class="card-inner"><div class="card-front"><div class="product-img-wrapper"><img src="img/Gemini_Generated_Image_sglgr9sglgr9sglg.png" alt="Indy"><div class="corner-accent"></div></div></div><div class="card-back"><div class="p-4 d-flex flex-column justify-content-center align-items-center text-center h-100"><h3 class="fw-bold text-uppercase text-white h5 mb-1">Indy Hollow</h3><p class="small text-muted mb-3">Titanium 149mm</p><div class="fw-bold fs-5 text-neon">72.00€</div><div class="corner-accent-bottom"></div></div></div></div></div></div>
+                    <div class="col-12 col-md-6 col-lg-3"><div class="product-card-only-img w-100 card-static"><div class="card-inner"><div class="card-front"><div class="product-img-wrapper"><img src="img/Gemini_Generated_Image_3ah7ld3ah7ld3ah7.png" alt="Spitfire"><div class="corner-accent"></div></div></div><div class="card-back"><div class="p-4 d-flex flex-column justify-content-center align-items-center text-center h-100"><h3 class="fw-bold text-uppercase text-white h5 mb-1">Spitfire F4</h3><p class="small text-muted mb-3">Conical 52mm 99a</p><div class="fw-bold fs-5 text-neon">45.00€</div><div class="corner-accent-bottom"></div></div></div></div></div></div>
+                    <div class="col-12 col-md-6 col-lg-3"><div class="product-card-only-img w-100 card-static"><div class="card-inner"><div class="card-front"><div class="product-img-wrapper"><img src="img/Gemini_Generated_Image_sj60dusj60dusj60.png" alt="Bones"><div class="corner-accent"></div></div></div><div class="card-back"><div class="p-4 d-flex flex-column justify-content-center align-items-center text-center h-100"><h3 class="fw-bold text-uppercase text-white h5 mb-1">Bones Swiss</h3><p class="small text-muted mb-3">Ceramic Bearings</p><div class="fw-bold fs-5 text-neon">85.00€</div><div class="corner-accent-bottom"></div></div></div></div></div></div>
+                </div> 
+            </div>
+        </section>
 
-                <div class="p-4 p-md-5 border border-secondary box-dark-bg">
+        <section class="latest-stories py-5 border-bottom border-secondary bg-transparent" style="border-color: rgba(255,255,255,0.1) !important;">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-end mb-5">
+                    <h2 class="text-white m-0 cyber-title fw-bold">TOKYO FILES</h2>
+                    <a href="#" class="btn btn-outline-neon">LEER BLOG</a>
+                </div>
+                <div class="p-4 p-md-5 border border-secondary" style="background: rgba(0,0,0,0.3);">
                     <div class="row g-5">
                         <div class="col-12 col-xl-7">
-                            <a href="#" class="text-decoration-none main-story">
-                                <h3 class="mb-4 text-white text-uppercase hover-blue">Cómo sobrevivir a la seguridad en Shibuya</h3>
+                            <a href="#" class="text-decoration-none">
+                                <h3 class="mb-4 text-white text-uppercase fw-bold">Cómo sobrevivir a la seguridad en Shibuya</h3>
                                 <div class="overflow-hidden border border-secondary mb-4">
-                                    <img src="img/Gemini_Generated_Image_tf46u1tf46u1tf46.png" class="story-img-large w-100" alt="Tokyo Blog">
+                                    <img src="img/Gemini_Generated_Image_tf46u1tf46u1tf46.png" class="w-100" style="object-fit: cover; height: 350px;" alt="Tokyo Blog">
                                 </div>
-                                <p class="date text-info small fw-bold">// DIC 20, 2024</p>
-                                <p class="excerpt text-secondary">Patinar en Tokio es un arte de golpear y huir. Analizamos las mejores rutas para evitar a los 'koban' en el distrito central y encontrar spots vírgenes.</p>
+                                <p class="text-neon small fw-bold mb-2">// DIC 20, 2024</p>
+                                <p class="text-secondary">Patinar en Tokio es un arte de golpear y huir. Analizamos las mejores rutas para evitar a los 'koban'.</p>
                             </a>
                         </div>
-
-                        <div class="col-12 col-xl-5">
-                            <div class="side-stories d-flex flex-column gap-5"> 
-                                <article class="d-flex gap-4 border-bottom border-secondary pb-4 align-items-start">
-                                    <div class="overflow-hidden border border-secondary flex-shrink-0" style="width: 120px; height: 90px;">
-                                        <div class="side-img box-gray" style="width: 100%; height: 100%; background-image: url('img/Gemini_Generated_Image_du6mlxdu6mlxdu6m.png');"></div>
-                                    </div>
-                                    <div>
-                                        <span class="text-primary fw-bold small">EVENTOS</span>
-                                        <h4 class="h6 text-white mt-1">Resultados CPH Open 2025: El caos organizado</h4>
-                                    </div>
+                        <div class="col-12 col-xl-5 align-self-center">
+                            <div class="d-flex flex-column gap-4"> 
+                                <article class="d-flex gap-3 border-bottom border-secondary pb-4 align-items-start" style="border-color: rgba(255,255,255,0.1) !important;">
+                                    <div class="overflow-hidden border border-secondary flex-shrink-0" style="width: 120px; height: 90px;"><img src="img/Gemini_Generated_Image_du6mlxdu6mlxdu6m.png" class="w-100 h-100" style="object-fit: cover;" alt="Img"></div>
+                                    <div><span class="text-neon fw-bold small">EVENTOS</span><h4 class="h6 text-white mt-1 fw-bold">Resultados CPH Open 2025</h4></div>
                                 </article>
-
-                                <article class="d-flex gap-4 border-bottom border-secondary pb-4 align-items-start">
-                                    <div class="overflow-hidden border border-secondary flex-shrink-0" style="width: 120px; height: 90px;">
-                                        <div class="side-img box-gray" style="width: 100%; height: 100%; background-image: url('img/Gemini_Generated_Image_qtdnhqtdnhqtdnhq.png');"></div>
-                                    </div>
-                                    <div>
-                                        <span class="text-primary fw-bold small">TECH</span>
-                                        <h4 class="h6 text-white mt-1">¿Ejes de Magnesio? Análisis de durabilidad</h4>
-                                    </div>
+                                <article class="d-flex gap-3 border-bottom border-secondary pb-4 align-items-start" style="border-color: rgba(255,255,255,0.1) !important;">
+                                    <div class="overflow-hidden border border-secondary flex-shrink-0" style="width: 120px; height: 90px;"><img src="img/Gemini_Generated_Image_qtdnhqtdnhqtdnhq.png" class="w-100 h-100" style="object-fit: cover;" alt="Img"></div>
+                                    <div><span class="text-neon fw-bold small">TECH</span><h4 class="h6 text-white mt-1 fw-bold">¿Ejes de Magnesio?</h4></div>
                                 </article>
-
-                                <article class="d-flex gap-4 align-items-start">
-                                    <div class="overflow-hidden border border-secondary flex-shrink-0" style="width: 120px; height: 90px;">
-                                        <div class="side-img box-gray" style="width: 100%; height: 100%; background-image: url('img/Gemini_Generated_Image_8bx4j38bx4j38bx4.png');"></div>
-                                    </div>
-                                    <div>
-                                        <span class="text-primary fw-bold small">SPOTS</span>
-                                        <h4 class="h6 text-white mt-1">Mármol Chino: Guía de spots en Shenzhen</h4>
-                                    </div>
+                                <article class="d-flex gap-3 align-items-start">
+                                    <div class="overflow-hidden border border-secondary flex-shrink-0" style="width: 120px; height: 90px;"><img src="img/Gemini_Generated_Image_8bx4j38bx4j38bx4.png" class="w-100 h-100" style="object-fit: cover;" alt="Img"></div>
+                                    <div><span class="text-neon fw-bold small">SPOTS</span><h4 class="h6 text-white mt-1 fw-bold">Mármol Chino: Guía</h4></div>
                                 </article>
                             </div>
-                        </div>
+                         </div>
                     </div>
                 </div> 
             </div>
@@ -188,76 +117,52 @@
 
         <section class="highlights py-5">
             <div class="container">
-                <h2 class="mb-5 text-white">RIDER PROFILE</h2>
+                <h2 class="mb-5 text-white cyber-title fw-bold">RIDER PROFILE</h2>
                 <div class="row align-items-start g-5">
                     <div class="col-lg-5">
-                        <div class="testimonial bg-dark p-4 border border-secondary h-100">
+                        <div class="bg-dark p-4 border border-secondary h-100">
                             <div class="d-flex gap-3 align-items-center mb-4">
-                                <div class="avatar circle-gray" style="background-image: url('img/5e35eae656748241af150b054f7d9692.jpg');"></div>
-                                <div>
-                                    <h4 class="m-0 text-white">AKIRA YAMAMOTO</h4>
-                                    <p class="m-0 text-muted small">Shinjuku, Tokyo</p>
-                                </div>
+                                <div style="background: url('img/5e35eae656748241af150b054f7d9692.jpg') center/cover; width: 50px; height: 50px; border-radius: 50%;"></div>
+                                <div><h4 class="m-0 text-white fw-bold">AKIRA YAMAMOTO</h4><p class="m-0 text-muted small">Shinjuku, Tokyo</p></div>
                             </div>
-                            <div class="stars text-danger mb-4">★★★★★</div>
+                            <div class="text-neon mb-4">★★★★★</div>
                             <h3 class="fw-light mb-3 text-white">"La precisión es todo."</h3>
-                            <p class="text-secondary">"En el asfalto nocturno de Tokio, no puedes permitirte fallar. SkateSet me ayudó a calibrar mi setup para la velocidad que necesito."</p>
+                            <p class="text-secondary">"En el asfalto nocturno de Tokio, no puedes permitirte fallar. SkateSet me ayudó a calibrar mi setup."</p>
                         </div>
                     </div>
-                    <div class="col-lg-7">
-                        <div class="highlight-media p-2 border border-info">
-                            <div class="media-large box-gray" style="height: 400px; background-image: url('img/Gemini_Generated_Image_otk9b8otk9b8otk9.png');"></div> 
-                        </div>
-                    </div>
+                    <div class="col-lg-7"><div class="p-2 border border-info"><div style="height: 400px; background: url('img/Gemini_Generated_Image_otk9b8otk9b8otk9.png') center/cover;"></div></div></div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="main-footer pt-5 border-top border-info bg-black">
+    <footer class="pt-5 border-top border-info" style="background-color: #0A0E14;">
         <div class="container">
             <div class="row justify-content-start text-start mb-5 border-bottom border-secondary pb-5">
                 <div class="col-lg-6">
-                    <h2 class="text-white mb-3">JOIN THE CREW</h2>
+                    <h2 class="text-white mb-3 cyber-title fw-bold">JOIN THE CREW</h2>
                     <p class="text-muted mb-4">Acceso anticipado a drops exclusivos.</p>
                     <form class="d-flex gap-2">
                         <input type="email" class="form-control rounded-0 bg-dark text-white border-secondary" placeholder="EMAIL ADDRESS_">
-                        <button type="submit" class="btn btn-primary text-nowrap">SUSCRIBIRME</button>
+                        <button type="submit" class="btn btn-outline-neon text-nowrap">SUSCRIBIRME</button>
                     </form>
                 </div>
             </div>
-
-            <div class="row pb-5">
-                <div class="col-md-4 mb-4">
-                    <div class="logo mb-3 fs-3 fw-bold text-white">SKATESET.</div>
-                    <div class="socials d-flex gap-4 fs-4 text-muted">
-                        <i class="fa-brands fa-instagram hover-white cursor-pointer"></i>
-                        <i class="fa-brands fa-discord hover-white cursor-pointer"></i>
-                        <i class="fa-brands fa-youtube hover-white cursor-pointer"></i>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <h4 class="text-white mb-3">SHOP</h4>
-                    <ul class="text-muted d-flex flex-column gap-2">
-                        <li><a href="#" class="text-decoration-none hover-white">Completes</a></li>
-                        <li><a href="#" class="text-decoration-none hover-white">Decks</a></li>
-                        <li><a href="#" class="text-decoration-none hover-white">Tech</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h4 class="text-white mb-3">SUPPORT</h4>
-                    <ul class="text-muted d-flex flex-column gap-2">
-                        <li><a href="#" class="text-decoration-none hover-white">Shipping</a></li>
-                        <li><a href="#" class="text-decoration-none hover-white">Contact</a></li>
-                    </ul>
-                </div>
+            <div class="text-center py-4 small border-top border-secondary" style="border-color: rgba(255,255,255,0.1) !important;">
+                <p class="m-0 text-muted">&copy; 2025 SKATESET PROJECT. DESIGNED IN TOKYO.</p>
             </div>
-        </div>
-        <div class="copyright text-center py-4 small border-top border-secondary">
-            <p class="m-0">&copy; 2025 SKATESET PROJECT. DESIGNED IN TOKYO.</p>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.product-card-only-img:not(.card-static)').forEach(card => {
+            card.addEventListener('click', () => {
+                const isAlreadyOpen = card.classList.contains('is-flipped');
+                document.querySelectorAll('.product-card-only-img:not(.card-static)').forEach(c => { c.classList.remove('active'); c.classList.remove('is-flipped'); });
+                if (!isAlreadyOpen) { card.classList.add('is-flipped'); card.classList.add('active'); }
+            });
+        });
+    </script>
 </body>
 </html>

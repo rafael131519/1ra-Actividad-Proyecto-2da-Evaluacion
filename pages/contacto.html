@@ -3,109 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONEXIÓN | SKATESET TOKYO</title>
+    <title>Contacto | SkateSet Tokyo</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="../css/style.css">
-    <style>
-        /* 1. Eliminamos el borde inferior que creaba la línea roja larga */
-        .contact-header {
-            display: inline-block;
-            border-bottom: none !important; 
-            margin-bottom: 1.5rem;
-        }
-
-        /* 2. Definimos el color rojo para la pequeña línea vertical decorativa */
-        .border-red-custom {
-            border-left: 3px solid #ff0000 !important; /* Rojo puro */
-        }
-    </style>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
 
-    <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="../index.html">SKATESET TOKYO<span class="dot">.</span></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="../index.html">INICIO</a></li>
-                    <li class="nav-item"><a class="nav-link" href="setup.html">SETUP</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#">CONTACTO</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<body class="bg-dark-custom">
 
-    <main class="container py-5 mt-lg-5">
-        <div class="row g-5 align-items-stretch">
-            
-            <div class="col-lg-5 d-flex flex-column">
-                <div class="contact-header">
-                    <h1 class="mb-0">CONTACTO</h1>
+    <header class="main-header sticky-top">
+        <nav class="navbar navbar-expand-lg py-4" style="background: rgba(10,14,20,0.9); backdrop-filter: blur(10px);">
+            <div class="container">
+                <a class="navbar-brand logo text-white me-5 cyber-title" href="../index.html">SKATESET<span class="text-neon">.</span></a>
+
+                <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                    <span class="navbar-toggler-icon"></span> 
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-lg-4 text-uppercase fw-bold">
+                        <li class="nav-item"><a class="nav-link text-secondary hover-white" href="setup.html">Setup</a></li>
+                        <li class="nav-item"><a class="nav-link text-neon" href="contacto.html">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link text-secondary hover-white" href="#">Decks</a></li>
+                        <li class="nav-item sale-link"><a class="nav-link" href="#">SALE %</a></li>
+                    </ul>
+
+                    <div class="header-actions d-flex align-items-center gap-3 mt-3 mt-lg-0">
+                        <i class="fa-solid fa-magnifying-glass search-icon text-white"></i>
+                        <a href="#" class="btn btn-outline-neon btn-sm">LOGIN</a>
+                    </div>
                 </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="py-5">
+        <section class="container">
+            <div class="row align-items-center gy-5">
                 
-                <p class="text-muted border-start border-red-custom ps-3 mb-5">
-                    Estableciendo enlace seguro con el distrito de Shibuya. Tiempo de respuesta estimado: <span style="color: var(--voltage-lime);">Sub-6 horas</span>.
-                </p>
+                <div class="col-lg-5">
+                    <h1 class="display-3 fw-bold mb-4 text-white cyber-title">GET IN<br><span class="text-neon">TOUCH</span></h1>
+                    <p class="mb-5 fs-5 text-secondary section-step border-0 pl-0">
+                        ¿Tienes dudas sobre tu setup? ¿Buscas una pieza específica de Japón? Escríbenos. Respondemos más rápido que un rodamiento cerámico.
+                    </p>
 
-                <div class="mb-4">
-                    <h4 class="h6 text-uppercase text-primary" style="color: var(--cyber-blue) !important;">Ubicación HQ</h4>
-                    <p class="small">2-chōme-2-1 Jinnan, Shibuya City, Tokyo 150-0041, Japón</p>
+                    <div class="d-flex flex-column gap-4">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="icon-box text-neon fs-3"><i class="fa-solid fa-location-dot"></i></div>
+                            <div>
+                                <h5 class="text-white m-0 cyber-title">HQ</h5>
+                                <p class="text-muted m-0">Shibuya District, Tokyo, JP</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="icon-box text-neon fs-3"><i class="fa-solid fa-envelope"></i></div>
+                            <div>
+                                <h5 class="text-white m-0 cyber-title">EMAIL</h5>
+                                <p class="text-muted m-0">support@skateset.jp</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="icon-box text-neon fs-3"><i class="fa-brands fa-discord"></i></div>
+                            <div>
+                                <h5 class="text-white m-0 cyber-title">COMMUNITY</h5>
+                                <p class="text-muted m-0">discord.gg/skateset</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="mb-4">
-                    <h4 class="h6 text-uppercase text-primary" style="color: var(--cyber-blue) !important;">Coordenadas</h4>
-                    <p class="small font-monospace">35.6641° N, 139.6978° E</p>
+                <div class="col-lg-6 offset-lg-1">
+                    <div class="p-5 border border-secondary" style="background-color: var(--card-bg); position: relative;">
+                        <div class="corner-accent"></div>
+                        <div class="corner-accent-bottom"></div>
+
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="text-secondary small mb-1 cyber-title">NOMBRE / AKA</label>
+                                    <input type="text" class="form-control rounded-0 bg-dark text-white border-secondary p-3" placeholder="Tu nombre">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="text-secondary small mb-1 cyber-title">EMAIL</label>
+                                    <input type="email" class="form-control rounded-0 bg-dark text-white border-secondary p-3" placeholder="email@ejemplo.com">
+                                </div>
+                                <div class="col-12">
+                                    <label class="text-secondary small mb-1 cyber-title">ASUNTO</label>
+                                    <select class="form-select rounded-0 bg-dark text-white border-secondary p-3">
+                                        <option selected>Soporte Técnico</option>
+                                        <option>Pedidos / Envíos</option>
+                                        <option>Colaboraciones</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="text-secondary small mb-1 cyber-title">MENSAJE</label>
+                                    <textarea class="form-control rounded-0 bg-dark text-white border-secondary p-3" rows="5" placeholder="Escribe aquí..."></textarea>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-outline-neon w-100 py-3 fw-bold">ENVIAR MENSAJE</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+
             </div>
+        </section>
+    </main>
 
-           <div class="col-lg-7">
-                <div class="card p-4 p-md-5 h-100">
-                    <h2 class="h3 mb-4 text-uppercase">Contactanos</h2>
-                    <form action="#" class="h-100 d-flex flex-column justify-content-between">
-                        <div class="row g-4"> 
-                            <div class="col-12">
-                                <label class="form-label small text-muted">ALIAS DEL OPERADOR (NOMBRE Y APELLIDOS)</label>
-                                <input type="text" class="form-control bg-transparent border-secondary text-white rounded-0" placeholder="Ej. CyberSkater_88">
-                            </div>
-
-                            <div class="col-12">
-                                <label class="form-label small text-muted">CANAL DE RESPUESTA (EMAIL)</label>
-                                <input type="email" class="form-control bg-transparent border-secondary text-white rounded-0" placeholder="nombre@net.com">
-                            </div>
-
-                            <div class="col-12">
-                                <label class="form-label small text-muted">PRIORIDAD</label>
-                                <select class="form-select bg-transparent border-secondary text-gray rounded-0">
-                                    <option selected>Consulta General</option>
-                                    <option value="1">Soporte Técnico Gear</option>
-                                    <option value="2">Colaboración / Media</option>
-                                    <option value="3">Urgente / Fallo en Hardware</option>
-                                </select>
-                            </div>
-
-                            <div class="col-12">
-                                <label class="form-label small text-muted">COMENTARIOS</label>
-                                <textarea class="form-control bg-transparent border-secondary text-white rounded-0" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
-                            </div>
-                        </div>
-
-                        <div class="mt-4">
-                            <button type="submit" class="btn btn-primary w-100 py-3 text-uppercase fw-bold">
-                                EJECUTAR ENVÍO <span class="ms-2">>></span>
-                            </button>
-                        </div>
+    <footer class="main-footer pt-5 border-top border-info mt-5" style="background-color: #0A0E14;">
+        <div class="container">
+            <div class="row justify-content-start text-start mb-5 border-bottom border-secondary pb-5">
+                <div class="col-lg-6">
+                    <h2 class="text-white mb-3 cyber-title">JOIN THE CREW</h2>
+                    <p class="text-muted mb-4">Acceso anticipado a drops exclusivos.</p>
+                    <form class="d-flex gap-2">
+                        <input type="email" class="form-control rounded-0 bg-dark text-white border-secondary" placeholder="EMAIL ADDRESS_">
+                        <button type="submit" class="btn btn-outline-neon text-nowrap">SUSCRIBIRME</button>
                     </form>
                 </div>
             </div>
-        </div>
-    </main>
 
-    <footer class="py-5 border-top border-secondary mt-5">
-        <div class="container text-center">
-            <p class="small text-muted mb-0">SKATESET TOKYO // SISTEMA DE COMUNICACIONES ENCRIPTADO</p>
+            <div class="copyright text-center py-4 small border-top border-secondary">
+                <p class="m-0">&copy; 2025 SKATESET PROJECT. DESIGNED IN TOKYO.</p>
+            </div>
         </div>
     </footer>
 

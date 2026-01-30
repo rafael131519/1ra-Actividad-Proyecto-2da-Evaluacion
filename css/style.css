@@ -1,85 +1,126 @@
+/* ============================================================
+   1. VARIABLES & BASE
+   ============================================================ */
+:root {
+    --bg-dark: #0A0E14;
+    --card-bg: #1A1D23;
+    --neon-green: #D4FF00;
+    --neon-pink: #FF0055;
+    --neon-blue: #00A8FF;
+    --font-main: 'Rajdhani', sans-serif;
+    --trans-bouncy: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --border-light: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+html, body {
+    scroll-snap-type: none !important;
+    scroll-behavior: auto !important;
+    font-family: var(--font-main);
+}
+
 .bg-dark-custom {
-    background-color: #0A0E14;
+    background-color: var(--bg-dark);
     min-height: 100vh;
+    background-image: linear-gradient(rgba(212, 255, 0, 0.03) 1px, transparent 1px), 
+                      linear-gradient(90deg, rgba(212, 255, 0, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: center;
 }
 
-/* Cambié .cyber-text a .cyber-title para que coincida con tu HTML */
-.cyber-title {
-    font-family: 'Rajdhani', sans-serif;
-    font-style: italic;
-    letter-spacing: -1px;
-    text-transform: uppercase;
-}
+/* Regla Universal de Imágenes (Anti-Gigantes) */
+img { max-width: 100%; height: auto; display: block; }
 
-.text-neon {
-    color: #D4FF00;
-    text-shadow: 0 0 15px rgba(212, 255, 0, 0.3);
-}
+/* ============================================================
+   2. UI & UTILS (NEÓN)
+   ============================================================ */
+.text-neon { color: var(--neon-green); text-shadow: 0 0 15px rgba(212, 255, 0, 0.3); }
+.text-neon-blue { color: var(--neon-blue); }
+.cyber-title { letter-spacing: -1px; text-transform: uppercase; }
+.section-step { border-left: 3px solid var(--neon-pink); letter-spacing: 2px; }
 
-
-/* --- TARJETAS VERTICALES ACTUALIZADAS --- */
-.product-card-only-img {
-    flex: 0 0 auto;
-    width: 240px; 
-    height: 420px; /* Formato vertical tipo póster */
-    background-color: #1A1D23;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    margin: 0 10px;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: scale(0.85);
-    opacity: 0.4;
-    filter: blur(2px) grayscale(40%);
-}
-
-/* ESTADO ACTIVO: Esto es lo que añade el JS al hacer clic */
-.product-card-only-img.active {
-    transform: scale(1.05);
-    opacity: 1;
-    filter: blur(0) grayscale(0%);
-    border: 1px solid #FF0055;
-    box-shadow: 0 0 30px rgba(255, 0, 85, 0.3);
-    z-index: 10;
-}
-
-/* AJUSTE DE IMAGEN: Muy importante para que no se deformen */
-.product-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Llena el cuadro vertical perfectamente */
-    object-position: center;
-    display: block;
-}
-
-
-
-
-
-
-/* --- NUEVOS ESTILOS PARA LA SECCIÓN IZQUIERDA --- */
-
-.section-step {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.5rem;
-    letter-spacing: 2px;
-    border-left: 3px solid #D4FF00; /* Línea de acento neón */
-    padding-left: 15px;
-    text-transform: uppercase;
-}
-
+/* Botones */
 .btn-outline-neon {
-    color: #D4FF00;
-    border: 1px solid rgba(212, 255, 0, 0.3);
-    font-family: 'Rajdhani', sans-serif;
-    background: rgba(212, 255, 0, 0.02);
-    transition: all 0.3s ease;
+    color: var(--neon-green); border: 1px solid rgba(212, 255, 0, 0.3); 
+    background: rgba(212, 255, 0, 0.02); transition: 0.3s;
+}
+.btn-outline-neon:hover {
+    background-color: var(--neon-green); color: var(--bg-dark); 
+    box-shadow: 0 0 15px rgba(212, 255, 0, 0.3); border-color: var(--neon-green);
 }
 
-.btn-outline-neon:hover {
-    background-color: #D4FF00;
-    color: #0A0E14;
-    box-shadow: 0 0 15px rgba(212, 255, 0, 0.3);
-    border-color: #D4FF00;
+/* Listas */
+.cyber-list-group { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); }
+.cyber-list-group .list-group-item { transition: 0.3s; }
+.cyber-list-group .list-group-item.active {
+    color: var(--neon-blue) !important; background-color: rgba(0, 168, 255, 0.03) !important;
+    border-left: 3px solid var(--neon-blue) !important; font-weight: 600;
 }
+
+/* ============================================================
+   3. TARJETAS 3D & CONTENEDORES
+   ============================================================ */
+.cards__container { overflow-x: auto; scrollbar-width: none; display: flex; gap: 10px; padding: 20px 0; }
+.cards__container::-webkit-scrollbar { display: none; }
+
+.product-card-only-img { 
+    perspective: 1000px; cursor: pointer; width: 200px; /* Base carrusel */
+    transition: transform 0.4s ease;
+    /* ESTADO VISIBLE: Sin blur, 100% opaco */
+    opacity: 1; filter: none; transform: scale(0.9);
+}
+
+.card-inner { transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; height: 350px; position: relative; }
+.product-card-only-img.is-flipped .card-inner { transform: rotateY(180deg); }
+.card-front, .card-back { 
+    -webkit-backface-visibility: hidden; backface-visibility: hidden; 
+    position: absolute; inset: 0; overflow: hidden; border-radius: 8px;
+    background-color: var(--card-bg); border: var(--border-light);
+}
+.card-back { transform: rotateY(180deg); }
+
+/* Estado Activo */
+.product-card-only-img.active { transform: scale(1.05); z-index: 10; }
+.product-card-only-img.active :is(.card-front, .card-back) {
+    border: 1px solid var(--neon-pink); box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
+}
+
+/* ============================================================
+   4. DECORACIÓN (ESQUINAS ROSAS UNIFICADAS)
+   ============================================================ */
+.corner-accent { position: absolute; top: 0; left: 0; width: 15px; height: 15px; border-top: 2px solid var(--neon-pink); border-left: 2px solid var(--neon-pink); z-index: 2; }
+.corner-accent-bottom { position: absolute; bottom: 0; right: 0; width: 15px; height: 15px; border-bottom: 2px solid var(--neon-pink); border-right: 2px solid var(--neon-pink); }
+
+/* Hover simple */
+.product-card-v2, .card-static { transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); }
+.product-card-v2:hover, .card-static:hover { border-color: rgba(255, 0, 85, 0.3); transform: translateY(-5px); }
+
+/* ============================================================
+   5. LIMITADORES DE TAMAÑO & GALERÍAS
+   ============================================================ */
+
+/* Catálogo Home */
+.card-static { transform: scale(1) !important; width: 100% !important; cursor: default; }
+.product-img-wrapper { width: 100%; height: 100%; }
+.product-img-wrapper img { width: 100% !important; height: 100% !important; object-fit: cover !important; max-height: 350px; }
+
+/* Galería Tablas (Step 1) */
+.deck-gallery-container { display: flex; justify-content: center; align-items: center; gap: 10px; height: 350px; width: 100%; overflow: hidden; }
+.deck-mini { 
+    height: 60% !important; width: auto !important; object-fit: contain; max-height: 250px;
+    transition: var(--trans-bouncy); 
+    opacity: 1; filter: none; /* Sin difuminar */
+}
+.deck-mini.active { height: 90% !important; transform: scale(1.1); z-index: 10; filter: drop-shadow(0 0 15px rgba(212, 255, 0, 0.4)); }
+
+/* Galería Ejes (Step 2) */
+.truck-gallery-container { display: flex; justify-content: center; align-items: center; gap: 20px; height: 300px; width: 100%; padding: 20px; }
+.truck-mini { 
+    width: 45% !important; height: auto !important; object-fit: contain; max-width: 250px;
+    transition: 0.4s ease; 
+    opacity: 1; filter: none; /* Sin difuminar */
+}
+.truck-mini.active { transform: scale(1.15); z-index: 10; filter: drop-shadow(0 0 15px rgba(0, 168, 255, 0.5)); }
+
+/* Cartas Ruedas (Step 3) */
+.card-img-box { position: relative; padding: 10px; background-color: var(--bg-dark); display: flex; justify-content: center; align-items: center; aspect-ratio: 1 / 1; }
+.card-img-box img { max-width: 80% !important; height: auto !important; object-fit: contain; }
