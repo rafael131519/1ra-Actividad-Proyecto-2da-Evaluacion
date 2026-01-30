@@ -1,0 +1,360 @@
+html, body {
+    scroll-snap-type: none !important;
+    scroll-behavior: auto !important; /* Desactiva el desplazamiento suave temporalmente para probar */
+}
+.bg-dark-custom {
+    background-color: #0A0E14;
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(212, 255, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 255, 0, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: center center;
+   
+}
+.btn-outline-neon {
+    color: #D4FF00;
+    border: 1px solid rgba(212, 255, 0, 0.3);
+    font-family: 'Rajdhani', sans-serif;
+    background: rgba(212, 255, 0, 0.02);
+    transition: all 0.3s ease;
+}
+
+.btn-outline-neon:hover {
+    background-color: #D4FF00;
+    color: #0A0E14;
+    box-shadow: 0 0 15px rgba(212, 255, 0, 0.3);
+    border-color: #D4FF00;
+}
+.cards__container {
+    display: flex;
+    gap: 10px;           /* Reducido al mínimo para que no haya tanto hueco */
+    padding: 20px 0;     /* Espacio arriba/abajo justo para el brillo */
+    overflow-x: auto;
+    align-items: center;
+    justify-content: flex-start; /* Alinea al inicio para controlar el scroll */
+    scrollbar-width: none; 
+}
+
+.cards__container::-webkit-scrollbar {
+    display: none; 
+}
+/* Cambié .cyber-text a .cyber-title para que coincida con tu HTML */
+.cyber-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-style: normal ;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+.text-neon {
+    color: #D4FF00;
+    text-shadow: 0 0 15px rgba(212, 255, 0, 0.3);
+}
+
+/* --- NUEVAS TARJETAS VERTICALES --- */
+
+.product-card-only-img {
+    flex: 0 0 auto;
+    width: 240px;
+    height: 300px;
+    perspective: 1000px; /* Profundidad para el giro */
+    cursor: pointer;
+    margin: 0 10px;
+    transition: transform 0.5s;
+}
+
+/* Tarjeta Activa (La que resalta en el centro) */
+.product-card-only-img.active {
+    transform: scale(1.05); /* Se agranda un poco */
+    opacity: 1;
+    filter: blur(0) grayscale(0%);
+    border: 2px solid #FF0055;
+    box-shadow: 0 0 30px rgba(255, 0, 85, 0.3);
+    z-index: 10;
+}
+
+
+/* Configuración del contenedor para el giro */
+.product-card-only-img {
+    perspective: 1000px; /* Crea el efecto de profundidad 3D */
+    cursor: pointer;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d !important; /* CRÍTICO: Mantiene el 3D */
+}
+
+/* LA REGLA QUE HACE EL GIRO */
+.product-card-only-img.is-flipped .card-inner {
+    transform: rotateY(180deg) !important;
+}
+
+/* Caras de la carta */
+.card-front, .card-back {
+    position: absolute;
+    inset: 0;
+    -webkit-backface-visibility: hidden !important; /* Para Safari */
+    backface-visibility: hidden !important; /* Oculta la cara que no se ve */
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* La cara trasera empieza ya rotada */
+.card-back {
+    transform: rotateY(180deg) !important;
+    background-color: #1A1D23;
+}
+
+/*tamaño de la imagen*/
+.product-img-wrapper, 
+.product-img-wrapper img {
+    width: 100%;
+    height: 100%; /* Obliga a la imagen a ser tan alta como la tarjeta */
+    object-fit: cover; /* Ajusta la imagen sin deformarla, llenando todo el espacio */
+    object-position: center; /* Centra la parte importante de la imagen */
+}
+/* Detalle de la esquina superior izquierda */
+
+.corner-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border-top: 2px solid #FF0055;
+    border-left: 2px solid #FF0055;
+    z-index: 2;
+}
+
+/* Detalle de la esquina inferior derecha */
+.corner-accent-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    border-bottom: 2px solid #FF0055; /* Borde abajo */
+}
+
+/* --- TARJETAS VERTICALES APRETADAS --- */
+.product-card-only-img {
+    flex: 0 0 auto;
+    width: 200px;         /* Ancho más estrecho para que quepan más en pantalla */
+    height: 350px;        /* Altura vertical proporcional */
+    background-color: #1A1D23;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    
+    /* Estado apagado (laterales) */
+    transform: scale(0.9);
+    opacity: 0.4;
+    filter: blur(1px);
+}
+
+/* Tarjeta Central Activa */
+.product-card-only-img.active {
+    transform: scale(1);  /* No crece tanto para no chocar con las otras */
+    opacity: 1;
+    filter: blur(0);
+    border: 1px solid #FF0055;
+    box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
+    z-index: 5;
+}
+/* --- Step 1  --- */
+
+.section-step {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    border-left: 2px solid var(--neon-pink);
+    padding-left: 15px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+}
+.card-front, .card-back {
+    position: absolute;
+    inset: 0; /* Esto estira el div a los 4 bordes */
+    backface-visibility: hidden;
+    overflow: hidden;
+}
+
+/* Fuerza a la imagen a cubrir todo el espacio sin deformarse */
+.product-img-wrapper, 
+.product-img-wrapper img {
+    width: 100%;
+    height: 100% !important; /* Obligatorio para eliminar el fondo negro */
+    object-fit: cover;      /* Recorta la imagen para que llene el rectángulo */
+    object-position: top;   /* Mantiene la parte superior de la ilustración visible */
+    display: block;
+}
+
+
+/* Contenedor principal de la lista */
+.cyber-list-group {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+/* Estilo de los nombres de los productos */
+.cyber-list-group .list-group-item {
+    background-color: transparent !important;
+    color: rgba(255, 255, 255, 0.6) !important; /* Subimos de 0.4 a 0.6 para que se lea */
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 1rem 1.5rem;
+    font-family: 'Rajdhani', sans-serif;
+    transition: all 0.3s ease;
+}
+
+
+
+/* Estado ACTIVO (EQUIPPED) */
+.cyber-list-group .list-group-item.active {
+    color: #00A8FF !important; /* Tu verde neón */
+    background-color: rgba(0, 174, 255, 0.03) !important;
+    border-left: 3px solid #00A8FF !important;
+    font-weight: 600;
+}
+
+/* Ajuste para las imágenes de las tablas */
+.tabla-img {
+    width: auto; /* Tamaño de cada tabla */
+    height: 300px;
+    transition: transform 0.3s;
+    border: 2px solid #00aaff;
+   filter: drop-shadow(0 0 10px rgba(0, 168, 255, 0.2));
+}
+.tabla-img:hover {
+    transform: scale(1.1); /* Efecto visual al pasar el ratón */
+}
+.menu-item {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid #333;
+    margin-bottom: 10px;
+    padding: 15px;
+    cursor: pointer;
+}
+.menu-item.active {
+    border: 2px solid #00aaff;
+    color: #00aaff;
+}
+
+/* ============================================================
+   CSS EXCLUSIVO PARA EL PASO 2 (TRUCKS)
+   ============================================================ */
+
+/* Contenedor de imágenes del Paso 2 */
+.p2-trucks-container .truck-img-wrapper {
+    display: flex;
+    gap: 25px; /* Espacio entre los dos trucks */
+    justify-content: center;
+}
+
+/* AQUÍ ELIGES EL TAMAÑO DE LAS IMÁGENES DEL PASO 2 */
+.p2-trucks-container .truck-preview-img {
+    width: 350px; /* <--- CAMBIA ESTE VALOR PARA EL TAMAÑO */
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(0, 168, 255, 0.2));
+    transition: transform 0.3s ease;
+}
+
+/* Efecto opcional solo para estas imágenes */
+.p2-trucks-container .truck-preview-img:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Ajuste del texto informativo para que no sea blanco */
+.p2-trucks-container .info-tecnica-box {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.p2-trucks-container .info-tecnica-box p {
+    color: #aaa !important;
+    font-family: 'Rajdhani', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+/* ============================================================
+   ESTILO TARJETAS PASO 3 (PRODUCT CARDS V2)
+   ============================================================ */
+
+.product-card-v2 {
+    background-color: #1A1D23;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.product-card-v2:hover {
+    border-color: rgba(255, 0, 85, 0.3);
+    transform: translateY(-5px);
+}
+
+/* Contenedor de Imagen */
+.card-img-box {
+    position: relative;
+    padding: 10px;
+    background-color: #0A0E14; /* Fondo algo más oscuro para la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+}
+
+.card-img-box img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Detalles de las esquinas (puntos azules/blancos) */
+.corner-dot-tl {
+    position: absolute; top: 10px; left: 10px;
+    width: 4px; height: 4px; background: #00A8FF;
+}
+.corner-dot-br {
+    position: absolute; bottom: 10px; right: 10px;
+    width: 4px; height: 4px; background: rgba(255,255,255,0.3);
+}
+
+/* Bloque de Texto */
+.card-info-box {
+    padding: 20px;
+}
+
+.product-name {
+    font-family: 'Rajdhani', sans-serif;
+    color: #FFFFFF;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.product-desc {
+    color: #888;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+}
+
+.product-price {
+    color: #00A8FF;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0;
+}
