@@ -1,0 +1,102 @@
+<div class="sk-section">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="mb-5 reveal">
+      <div class="sk-badge mb-2">Tienda</div>
+      <h1 class="text-white fw-bold" style="font-size: 2rem;">Catalogo</h1>
+    </div>
+
+    <!-- Filtros -->
+    <div class="d-flex flex-column flex-md-row gap-3 mb-5 justify-content-between reveal">
+      <div class="d-flex gap-2 flex-wrap">
+        @for (cat of categorias; track cat) {
+          <button (click)="setCategoria(cat)"
+                  class="btn btn-sm"
+                  [class.btn-accent]="catActiva === cat"
+                  [class.btn-ghost]="catActiva !== cat"
+                  style="font-size: 0.85rem;">{{ cat }}</button>
+        }
+      </div>
+      <div class="d-flex gap-2 flex-wrap">
+        <input type="text" class="sk-input form-control"
+               placeholder="Buscar producto..."
+               style="max-width: 200px; font-size: 0.88rem;"
+               [(ngModel)]="busqueda" (ngModelChange)="filtrar()">
+        <select class="sk-input form-select"
+                style="max-width: 150px; font-size: 0.88rem;"
+                [(ngModel)]="orden" (ngModelChange)="filtrar()">
+          <option value="nombre">Nombre A-Z</option>
+          <option value="precio-asc">Precio menor</option>
+          <option value="precio-desc">Precio mayor</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="row g-3">
+      @for (p of filtrados; track p.id; let i = $index) {
+        <div class="col-12 col-sm-6 col-lg-4 reveal">
+          <div class="flip-card w-100" [class.flipped]="flipped === p.id"
+               (click)="toggleFlip(p.id)" style="height: 320px;">
+            <div class="flip-card-inner w-100 h-100">
+
+              <!-- Frente -->
+              <div class="flip-card-front sk-card d-flex flex-column" style="background: var(--color-surface);">
+                <div style="height: 180px; display: flex; align-items: center; justify-content: center; padding: 16px; background: var(--color-bg);">
+                  <img [src]="p.imagen" [alt]="p.nombre" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                </div>
+                <div class="p-3 flex-grow-1 d-flex flex-column justify-content-between">
+                  <div>
+                    <div style="font-size: 0.72rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.05em;">{{ p.categoria }}</div>
+                    <h6 class="text-white fw-semibold mb-0 mt-1" style="font-size: 0.92rem;">{{ p.nombre }}</h6>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-white fw-bold">{{ p.precio | number:'1.2-2' }} EUR</span>
+                    <span style="font-size: 0.75rem; color: #555;"><i class="fa-solid fa-rotate me-1"></i>Detalles</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dorso -->
+              <div class="flip-card-back sk-card d-flex flex-column justify-content-between p-3"
+                   style="background: var(--color-surface); border-color: #333;">
+                <div>
+                  <div style="font-size: 0.72rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">{{ p.categoria }}</div>
+                  <h6 class="text-white fw-semibold mb-2" style="font-size: 0.92rem;">{{ p.nombre }}</h6>
+                  <p style="color: #aaa; font-size: 0.82rem; line-height: 1.5;">{{ p.descripcion | slice:0:110 }}...</p>
+                  <div class="d-flex gap-2 mt-2 flex-wrap">
+                    <span style="font-size: 0.75rem; color: #666; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 4px; padding: 2px 6px;">
+                      Stock: {{ p.stock }}
+                    </span>
+                    <span style="font-size: 0.75rem; color: #666; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 4px; padding: 2px 6px;">
+                      ★ {{ p.rating }}/5
+                    </span>
+                  </div>
+                </div>
+                <div class="d-flex gap-2 mt-3">
+                  <a [routerLink]="['/producto', p.id]" class="btn btn-ghost btn-sm flex-grow-1"
+                     (click)="$event.stopPropagation()" style="font-size: 0.82rem;">Ver detalle</a>
+                  <button class="btn btn-accent btn-sm flex-grow-1"
+                          (click)="$event.stopPropagation(); addToCart(p)" style="font-size: 0.82rem;">
+                    Anadir
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (filtrados.length === 0) {
+        <div class="col-12 text-center py-5">
+          <i class="fa-solid fa-magnifying-glass" style="color: #444; font-size: 2rem; margin-bottom: 12px; display: block;"></i>
+          <p style="color: var(--color-muted);">Sin resultados para esa busqueda.</p>
+          <button class="btn btn-ghost btn-sm mt-2" (click)="setCategoria('Todos'); busqueda=''">Limpiar filtros</button>
+        </div>
+      }
+    </div>
+
+  </div>
+</div>

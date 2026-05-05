@@ -1,0 +1,84 @@
+<div class="d-flex align-items-center justify-content-center" style="min-height: 80vh; padding: 40px 16px;">
+  <div style="width: 100%; max-width: 440px;">
+
+    <!-- Tabs Login / Register -->
+    <div class="d-flex mb-4" style="border-bottom: 1px solid #2a2a2a;">
+      <a routerLink="/login"
+         style="flex: 1; text-align: center; padding: 10px; font-weight: 600; font-size: 0.9rem; text-decoration: none; border-bottom: 2px solid var(--color-accent); color: var(--color-accent);">
+        Iniciar sesion
+      </a>
+      <a routerLink="/register"
+         style="flex: 1; text-align: center; padding: 10px; font-weight: 600; font-size: 0.9rem; text-decoration: none; border-bottom: 2px solid transparent; color: #555;">
+        Crear cuenta
+      </a>
+    </div>
+
+    <div class="text-center mb-4">
+      <h1 class="text-white fw-bold mb-1" style="font-size: 1.6rem;">Bienvenido de nuevo</h1>
+      <p style="color: var(--color-muted); font-size: 0.88rem;">Accede a tu cuenta SkateSet</p>
+    </div>
+
+    <div class="sk-card p-4" style="border-radius: 8px;">
+      @if (error) {
+        <div style="background: rgba(255,68,68,0.08); border: 1px solid rgba(255,68,68,0.3); border-radius: 6px; padding: 10px 14px; font-size: 0.85rem; color: #ff7777; margin-bottom: 20px;">
+          {{ error }}
+        </div>
+      }
+
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="d-flex flex-column gap-3">
+
+          <div>
+            <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Email</label>
+            <input type="email" formControlName="email" class="sk-input form-control" placeholder="tu@email.com">
+            @if (f['email'].invalid && f['email'].touched) {
+              <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">
+                @if (f['email'].errors?.['required']) { Email requerido. }
+                @if (f['email'].errors?.['email']) { Email invalido. }
+              </div>
+            }
+          </div>
+
+          <div>
+            <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Contrasena</label>
+            <div style="position: relative;">
+              <input [type]="showPass ? 'text' : 'password'" formControlName="password"
+                     class="sk-input form-control" placeholder="Minimo 6 caracteres" style="padding-right: 44px !important;">
+              <button type="button" (click)="showPass = !showPass"
+                      style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #555; cursor: pointer; padding: 0;">
+                <i class="fa-solid" [class.fa-eye]="!showPass" [class.fa-eye-slash]="showPass"></i>
+              </button>
+            </div>
+            @if (f['password'].invalid && f['password'].touched) {
+              <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">
+                @if (f['password'].errors?.['required']) { Contrasena requerida. }
+                @if (f['password'].errors?.['minlength']) { Minimo 6 caracteres. }
+              </div>
+            }
+          </div>
+
+          <!-- Checkbox "No tengo cuenta" -->
+          <div class="d-flex align-items-center gap-2 mt-1">
+            <input type="checkbox" id="irRegistro" class="form-check-input m-0"
+                   style="background: #1a1a1a; border-color: #444; cursor: pointer; width: 16px; height: 16px;"
+                   (change)="irARegistro($event)">
+            <label for="irRegistro" style="font-size: 0.85rem; color: #666; cursor: pointer; margin: 0;">
+              No tengo cuenta, quiero registrarme
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-accent w-100 py-2 mt-1">Iniciar sesion</button>
+
+        </div>
+      </form>
+
+      <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #1f1f1f; text-align: center;">
+        <p style="font-size: 0.82rem; color: #444; margin: 0;">
+          No tienes cuenta?
+          <a routerLink="/register" style="color: var(--color-accent); text-decoration: none; font-weight: 600;"> Registrate aqui</a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>

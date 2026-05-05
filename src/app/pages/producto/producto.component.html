@@ -1,0 +1,113 @@
+<div class="sk-section">
+  <div class="container">
+
+    <a routerLink="/catalogo" class="btn btn-ghost btn-sm mb-4" style="font-size: 0.85rem;">
+      <i class="fa-solid fa-arrow-left me-2"></i>Volver al catalogo
+    </a>
+
+    @if (producto) {
+      <!-- DOS COLUMNAS -->
+      <div class="row g-5 mb-5">
+
+        <!-- COL 1: Imagenes -->
+        <div class="col-12 col-lg-6">
+          <div class="sk-card d-flex align-items-center justify-content-center mb-3"
+               style="height: 420px; background: var(--color-surface); border-radius: 8px; overflow: hidden;">
+            <img [src]="imgActiva" [alt]="producto.nombre"
+                 style="max-height: 100%; max-width: 100%; object-fit: contain; padding: 24px;">
+          </div>
+          <div class="d-flex gap-2">
+            @for (img of [producto.imagenFrontal, producto.imagenDorso, producto.imagen]; track $index) {
+              <div (click)="setImg(img)"
+                   style="width: 72px; height: 72px; border-radius: 6px; overflow: hidden; cursor: pointer; transition: border-color 0.2s;"
+                   [style.border]="imgActiva === img ? '2px solid var(--color-accent)' : '2px solid var(--color-border)'">
+                <img [src]="img" style="width: 100%; height: 100%; object-fit: contain; padding: 6px;">
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- COL 2: Info -->
+        <div class="col-12 col-lg-6">
+          <span class="sk-badge mb-3 d-inline-block">{{ producto.categoria }}</span>
+          <h1 class="text-white fw-bold mb-2" style="font-size: 1.8rem; line-height: 1.2;">{{ producto.nombre }}</h1>
+
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <span style="color: #f0b429; font-size: 0.9rem;">
+              @for (s of stars(producto.rating); track $index) {★}
+            </span>
+            <span style="color: var(--color-muted); font-size: 0.85rem;">({{ producto.resenas }} resenas)</span>
+          </div>
+
+          <div class="fw-bold text-white mb-4" style="font-size: 2rem;">
+            {{ producto.precio | number:'1.2-2' }}
+            <span style="font-size: 1rem; color: var(--color-muted); font-weight: 400;">EUR</span>
+          </div>
+
+          <p style="color: #aaa; font-size: 0.93rem; line-height: 1.7; margin-bottom: 20px;">{{ producto.descripcion }}</p>
+
+          <!-- Stock -->
+          <div class="mb-4" style="font-size: 0.85rem;">
+            @if (producto.stock > 5) {
+              <span style="color: #44bb77;"><i class="fa-solid fa-circle-check me-1"></i>En stock ({{ producto.stock }} disponibles)</span>
+            } @else if (producto.stock > 0) {
+              <span style="color: #f0b429;"><i class="fa-solid fa-triangle-exclamation me-1"></i>Ultimas unidades ({{ producto.stock }})</span>
+            } @else {
+              <span style="color: var(--color-danger);"><i class="fa-solid fa-circle-xmark me-1"></i>Sin stock</span>
+            }
+          </div>
+
+          <!-- Cantidad + Carrito -->
+          <div class="d-flex gap-3 align-items-center mb-4 flex-wrap">
+            <div class="d-flex align-items-center" style="border: 1px solid var(--color-border); border-radius: 6px; overflow: hidden;">
+              <button class="btn btn-sm text-white px-3 py-2" (click)="changeCantidad(-1)"
+                      style="border: none; background: transparent; border-right: 1px solid var(--color-border);">−</button>
+              <span class="px-3 text-white fw-semibold" style="min-width: 40px; text-align: center;">{{ cantidad }}</span>
+              <button class="btn btn-sm text-white px-3 py-2" (click)="changeCantidad(1)"
+                      style="border: none; background: transparent; border-left: 1px solid var(--color-border);">+</button>
+            </div>
+            <button class="btn btn-accent px-4 flex-grow-1" (click)="addToCart()" [disabled]="producto.stock === 0">
+              @if (agregado) {
+                <i class="fa-solid fa-check me-2"></i>Anadido
+              } @else {
+                <i class="fa-solid fa-bag-shopping me-2"></i>Anadir al carrito
+              }
+            </button>
+          </div>
+
+          <a routerLink="/carrito" class="btn btn-ghost w-100 mb-4">Ir al carrito</a>
+
+          <!-- Especificaciones -->
+          <div style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 6px; padding: 16px; border-left: 3px solid var(--color-accent);">
+            <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #555; margin-bottom: 8px;">Especificaciones</p>
+            <p style="color: #aaa; font-size: 0.88rem; line-height: 1.6; margin: 0;">{{ producto.detalle }}</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Relacionados -->
+      <div>
+        <h4 class="text-white fw-bold mb-4" style="font-size: 1.1rem;">Tambien te puede interesar</h4>
+        <div class="row g-3">
+          @for (r of relacionados; track r.id) {
+            <div class="col-6 col-md-3">
+              <a [routerLink]="['/producto', r.id]" class="text-decoration-none">
+                <div class="sk-card text-center p-3 h-100" style="border-radius: 8px;">
+                  <img [src]="r.imagen" [alt]="r.nombre"
+                       style="height: 80px; width: 100%; object-fit: contain; margin-bottom: 8px;">
+                  <div class="text-white fw-semibold" style="font-size: 0.82rem; margin-bottom: 2px;">{{ r.nombre }}</div>
+                  <div style="color: var(--color-muted); font-size: 0.8rem;">{{ r.precio | number:'1.2-2' }} EUR</div>
+                </div>
+              </a>
+            </div>
+          }
+        </div>
+      </div>
+
+    } @else {
+      <div class="text-center py-5" style="color: var(--color-muted);">Cargando producto...</div>
+    }
+
+  </div>
+</div>

@@ -1,0 +1,352 @@
+<div>
+
+  <!-- HERO CAROUSEL -->
+  <section>
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+      <div class="carousel-inner">
+        @for (slide of carouselSlides; track $index) {
+          <div class="carousel-item" [class.active]="$index === 0">
+            <div style="height: 88vh; min-height: 500px; position: relative; overflow: hidden;">
+              <div style="position: absolute; inset: 0; background-size: cover; background-position: center;"
+                   [style.background-image]="'url(' + slide.img + ')'"></div>
+              <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(13,13,13,0.92) 45%, rgba(13,13,13,0.3));"></div>
+              <div class="container h-100 d-flex align-items-center" style="position: relative; z-index: 1;">
+                <div style="max-width: 520px;">
+                  <span class="sk-badge mb-3 d-inline-block">{{ slide.tag }}</span>
+                  <h1 class="fw-bold text-white mb-3" style="font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; white-space: pre-line;">{{ slide.titulo }}</h1>
+                  <p class="mb-4" style="color: #aaa; font-size: 1rem;">{{ slide.sub }}</p>
+                  <div class="d-flex gap-3 flex-wrap">
+                    <a routerLink="/catalogo" class="btn btn-accent px-4 py-2">Ver catalogo</a>
+                    <a routerLink="/register" class="btn btn-ghost px-4 py-2">Crear cuenta</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+      <!-- Indicators -->
+      <div class="carousel-indicators">
+        @for (slide of carouselSlides; track $index) {
+          <button type="button" data-bs-target="#heroCarousel"
+                  [attr.data-bs-slide-to]="$index" [class.active]="$index === 0"
+                  style="width: 24px; height: 3px; border-radius: 2px;"></button>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <section style="background: var(--color-surface); border-bottom: 1px solid var(--color-border);">
+    <div class="container py-4">
+      <div class="row text-center gy-3">
+        <div class="col-6 col-md-3">
+          <div class="fw-bold fs-4" style="font-family: var(--font-title); color: var(--color-accent);">10+</div>
+          <div style="color: var(--color-muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Marcas</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="fw-bold fs-4" style="font-family: var(--font-title); color: var(--color-accent);">500+</div>
+          <div style="color: var(--color-muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Productos</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="fw-bold fs-4" style="font-family: var(--font-title); color: var(--color-accent);">2K+</div>
+          <div style="color: var(--color-muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Clientes</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="fw-bold fs-4" style="font-family: var(--font-title); color: var(--color-accent);">24h</div>
+          <div style="color: var(--color-muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Envio express</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARRUSEL TABLAS -->
+  <section class="sk-section" style="border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-end mb-5 reveal">
+        <div>
+          <div class="sk-badge mb-2">Coleccion</div>
+          <h2 class="text-white fw-bold m-0" style="font-size: 1.8rem;">Nuestras Tablas</h2>
+        </div>
+        <a routerLink="/catalogo" style="color: var(--color-muted); font-size: 0.88rem; text-decoration: none;">
+          Ver todas <i class="fa-solid fa-arrow-right ms-1"></i>
+        </a>
+      </div>
+
+      @if (tablas.length > 0) {
+        <div class="row g-4 align-items-center">
+
+          <!-- Miniaturas -->
+          <div class="col-12 col-md-2 reveal">
+            <div class="d-flex flex-row flex-md-column gap-2 overflow-x-auto pb-1 pb-md-0">
+              @for (t of tablas; track t.id; let i = $index) {
+                <div (click)="selectTabla(i)"
+                     style="width: 60px; height: 60px; border-radius: 6px; cursor: pointer; overflow: hidden; flex-shrink: 0; transition: opacity 0.2s, border-color 0.2s;"
+                     [style.border]="tablaActiva === i ? '2px solid var(--color-accent)' : '2px solid var(--color-border)'"
+                     [style.opacity]="tablaActiva === i ? '1' : '0.45'">
+                  <img [src]="t.imagen" [alt]="t.nombre" style="width: 100%; height: 100%; object-fit: contain; padding: 4px;">
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Flip card -->
+          <div class="col-12 col-md-5 reveal d1 d-flex justify-content-center">
+            <div class="flip-card" style="width: 240px; height: 360px;" [class.flipped]="tablaFlipped" (click)="toggleFlip()">
+              <div class="flip-card-inner w-100 h-100">
+                <div class="flip-card-front sk-card d-flex align-items-center justify-content-center"
+                     style="background: var(--color-surface);">
+                  <img [src]="tablas[tablaActiva].imagenFrontal" [alt]="tablas[tablaActiva].nombre"
+                       style="width: 100%; height: 100%; object-fit: contain; padding: 16px;">
+                  <div style="position: absolute; bottom: 10px; left: 0; right: 0; text-align: center;">
+                    <span style="font-size: 0.75rem; color: var(--color-muted);">
+                      <i class="fa-solid fa-rotate me-1"></i>Girar
+                    </span>
+                  </div>
+                </div>
+                <div class="flip-card-back sk-card d-flex align-items-center justify-content-center"
+                     style="background: var(--color-surface); border-color: var(--color-accent);">
+                  <img [src]="tablas[tablaActiva].imagenDorso" [alt]="tablas[tablaActiva].nombre + ' dorso'"
+                       style="width: 100%; height: 100%; object-fit: contain; padding: 16px;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info tabla -->
+          <div class="col-12 col-md-5 reveal d2">
+            <div class="p-4 sk-card">
+              <h3 class="text-white fw-bold mb-1">{{ tablas[tablaActiva].nombre }}</h3>
+              <p style="color: var(--color-muted); font-size: 0.9rem; margin-bottom: 16px;">{{ tablas[tablaActiva].medida }} &bull; Maple canadiense</p>
+              <div class="fs-3 fw-bold text-white mb-4">{{ tablas[tablaActiva].precio | number:'1.2-2' }} <span style="font-size: 1rem; color: var(--color-muted);">EUR</span></div>
+              <div class="d-flex align-items-center gap-3 mb-4">
+                <button class="btn btn-ghost btn-sm" (click)="prevTabla()"><i class="fa-solid fa-chevron-left"></i></button>
+                <span style="color: var(--color-muted); font-size: 0.85rem;">{{ tablaActiva + 1 }} / {{ tablas.length }}</span>
+                <button class="btn btn-ghost btn-sm" (click)="nextTabla()"><i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+              <a [routerLink]="['/producto', tablas[tablaActiva].id]" class="btn btn-accent w-100">Ver producto</a>
+            </div>
+          </div>
+
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- PRODUCTOS DESTACADOS -->
+  <section class="sk-section" style="border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-end mb-5 reveal">
+        <div>
+          <div class="sk-badge mb-2">Seleccion</div>
+          <h2 class="text-white fw-bold m-0" style="font-size: 1.8rem;">Productos Destacados</h2>
+        </div>
+        <a routerLink="/catalogo" style="color: var(--color-muted); font-size: 0.88rem; text-decoration: none;">
+          Ver todos <i class="fa-solid fa-arrow-right ms-1"></i>
+        </a>
+      </div>
+      <div class="row g-3">
+        @for (p of productos; track p.id; let i = $index) {
+          <div class="col-12 col-sm-6 col-lg-3 reveal" [class]="'d' + (i+1)">
+            <div class="sk-card h-100 d-flex flex-column" style="border-radius: 8px; overflow: hidden;">
+              <div style="height: 180px; background: var(--color-surface); display: flex; align-items: center; justify-content: center; padding: 12px;">
+                <img [src]="p.imagen" [alt]="p.nombre" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+              </div>
+              <div class="p-3 flex-grow-1 d-flex flex-column">
+                <span style="font-size: 0.75rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">{{ p.categoria }}</span>
+                <h6 class="text-white fw-semibold mb-1" style="font-size: 0.95rem;">{{ p.nombre }}</h6>
+                <p style="color: var(--color-muted); font-size: 0.82rem; flex-grow: 1; margin-bottom: 12px;">{{ p.descripcion | slice:0:70 }}...</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="fw-bold text-white">{{ p.precio | number:'1.2-2' }} EUR</span>
+                  <div class="d-flex gap-2">
+                    <a [routerLink]="['/producto', p.id]" class="btn btn-ghost btn-sm py-1 px-2" style="font-size: 0.8rem;">Ver</a>
+                    <button class="btn btn-accent btn-sm py-1 px-2" style="font-size: 0.8rem;" (click)="addToCart(p)">
+                      <i class="fa-solid fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- LEYENDAS DEL SKATE -->
+  <section class="sk-section" style="background: var(--color-surface); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <div class="sk-badge mb-3">Hall of Fame</div>
+        <h2 class="text-white fw-bold" style="font-size: 1.8rem;">Leyendas del Skate</h2>
+        <p style="color: var(--color-muted); font-size: 0.9rem; margin-top: 8px;">Los skaters que definieron la historia</p>
+      </div>
+
+      <!-- Selector de leyenda -->
+      <div class="d-flex flex-wrap justify-content-center gap-2 mb-4 reveal">
+        @for (l of leyendas; track l.id) {
+          <button (click)="selectLeyenda(l)"
+                  class="btn btn-sm"
+                  [style.border]="leyendaActiva?.id === l.id ? '1px solid ' + l.color : '1px solid var(--color-border)'"
+                  [style.color]="leyendaActiva?.id === l.id ? l.color : 'var(--color-muted)'"
+                  [style.background]="leyendaActiva?.id === l.id ? 'rgba(232,255,0,0.06)' : 'transparent'"
+                  style="font-size: 0.85rem; font-weight: 500; transition: all 0.2s; border-radius: 6px;">
+            {{ l.nombre }}
+          </button>
+        }
+      </div>
+
+      <!-- Card leyenda activa -->
+      @if (leyendaActiva) {
+        <div class="row g-0 reveal" style="border: 1px solid var(--color-border); border-radius: 8px; overflow: hidden;">
+          <div class="col-12 col-md-4" style="position: relative; min-height: 320px;">
+            <img [src]="leyendaActiva.imagen" [alt]="leyendaActiva.nombre"
+                 style="width: 100%; height: 100%; object-fit: cover; min-height: 320px; display: block;"
+                 onerror="this.style.display='none'">
+            <div style="position: absolute; inset: 0; background: linear-gradient(to right, transparent 60%, var(--color-surface));"></div>
+            <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 3px;"
+                 [style.background]="leyendaActiva.color"></div>
+          </div>
+          <div class="col-12 col-md-8 p-4 p-md-5" style="background: var(--color-surface);">
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <span class="sk-badge">{{ leyendaActiva.estilo }}</span>
+              <span style="font-size: 0.78rem; color: var(--color-muted); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 4px; padding: 2px 8px;">
+                {{ leyendaActiva.pais }}
+              </span>
+              <span style="font-size: 0.78rem; color: var(--color-muted); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 4px; padding: 2px 8px;">
+                Nac. {{ leyendaActiva.nacimiento }}
+              </span>
+            </div>
+            <h3 class="text-white fw-bold mb-1">{{ leyendaActiva.nombre }}</h3>
+            <p style="font-size: 0.9rem; font-style: italic; margin-bottom: 16px;" [style.color]="leyendaActiva.color">
+              "{{ leyendaActiva.apodo }}"
+            </p>
+            <p style="color: #aaa; font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px;">{{ leyendaActiva.descripcion }}</p>
+            <div>
+              <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #555; margin-bottom: 8px;">Logros</p>
+              <div class="d-flex flex-column gap-1">
+                @for (logro of leyendaActiva.logros; track $index) {
+                  <div class="d-flex align-items-center gap-2">
+                    <div style="width: 4px; height: 4px; border-radius: 50%;" [style.background]="leyendaActiva.color"></div>
+                    <span style="color: #aaa; font-size: 0.88rem;">{{ logro }}</span>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- Grid miniaturas -->
+      <div class="row g-3 mt-3">
+        @for (l of leyendas; track l.id) {
+          <div class="col-6 col-md-4 col-lg-2 reveal">
+            <div (click)="selectLeyenda(l)"
+                 class="sk-card text-center p-3 h-100"
+                 style="cursor: pointer; border-radius: 8px;"
+                 [style.border-color]="leyendaActiva?.id === l.id ? l.color : ''">
+              <div style="width: 56px; height: 56px; border-radius: 50%; overflow: hidden; margin: 0 auto 10px;"
+                   [style.border]="'2px solid ' + l.color">
+                <img [src]="l.imagen" [alt]="l.nombre" style="width: 100%; height: 100%; object-fit: cover;"
+                     onerror="this.src='assets/img/Gemini_Generated_Image_pjg5u7pjg5u7pjg5.png'">
+              </div>
+              <div class="fw-semibold text-white" style="font-size: 0.82rem;">{{ l.nombre }}</div>
+              <div style="font-size: 0.75rem; color: var(--color-muted);">{{ l.estilo }}</div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="sk-section" style="border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 reveal">
+          <div class="sk-badge mb-3">Quienes somos</div>
+          <h2 class="text-white fw-bold mb-4" style="font-size: 1.8rem; line-height: 1.2;">
+            Mas que una tienda.<br>Una comunidad.
+          </h2>
+          <p style="color: #aaa; font-size: 0.95rem; line-height: 1.7; margin-bottom: 16px;">
+            SkateSet nacio en Tokyo con una idea simple: ofrecer el mejor equipamiento de skate sin compromiso. Cada producto que vendemos ha sido probado en la calle.
+          </p>
+          <p style="color: #aaa; font-size: 0.95rem; line-height: 1.7; margin-bottom: 24px;">
+            Conectamos riders con el hardware que realmente necesitan, desde tablas hasta rodamientos.
+          </p>
+          <div class="d-flex gap-5">
+            <div><div class="fw-bold text-white fs-5">2019</div><div style="color: var(--color-muted); font-size: 0.82rem;">Fundacion</div></div>
+            <div><div class="fw-bold text-white fs-5">Tokyo</div><div style="color: var(--color-muted); font-size: 0.82rem;">HQ</div></div>
+            <div><div class="fw-bold text-white fs-5">Pro</div><div style="color: var(--color-muted); font-size: 0.82rem;">Team</div></div>
+          </div>
+        </div>
+        <div class="col-lg-6 reveal d2">
+          <div class="d-flex flex-column gap-3">
+            @for (u of usuarios; track u.id) {
+              <div class="sk-card p-3 d-flex gap-3 align-items-center" style="border-radius: 8px;">
+                <img [src]="u.avatar" [alt]="u.nombre"
+                     style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+                <div>
+                  <div class="text-white fw-semibold" style="font-size: 0.9rem;">{{ u.nombre }}</div>
+                  <div style="color: var(--color-muted); font-size: 0.8rem;">{{ u.nivel }} &bull; {{ u.ciudad }}</div>
+                  <div style="color: #666; font-size: 0.8rem; font-style: italic;">"{{ u.cita }}"</div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section class="sk-section" style="border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-end mb-5 reveal">
+        <div>
+          <div class="sk-badge mb-2">Blog</div>
+          <h2 class="text-white fw-bold m-0" style="font-size: 1.8rem;">Ultimas entradas</h2>
+        </div>
+      </div>
+      <div class="row g-3">
+        @for (post of blog; track post.id) {
+          <div class="col-12 col-md-4 reveal">
+            <div class="sk-card h-100" style="border-radius: 8px; overflow: hidden;">
+              <div style="height: 180px; overflow: hidden;">
+                <img [src]="post.imagen" [alt]="post.titulo"
+                     style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;"
+                     onmouseover="this.style.transform='scale(1.03)'"
+                     onmouseout="this.style.transform='scale(1)'">
+              </div>
+              <div class="p-3">
+                <span class="sk-badge mb-2 d-inline-block">{{ post.categoria }}</span>
+                <h6 class="text-white fw-semibold mb-1">{{ post.titulo }}</h6>
+                <p style="color: var(--color-muted); font-size: 0.82rem; margin-bottom: 8px;">{{ post.resumen }}</p>
+                <span style="color: #555; font-size: 0.78rem;">{{ post.fecha }}</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="sk-section-sm" style="background: var(--color-surface);">
+    <div class="container text-center reveal">
+      <h2 class="text-white fw-bold mb-2" style="font-size: 1.6rem;">Arma tu setup hoy</h2>
+      <p style="color: var(--color-muted); margin-bottom: 24px; font-size: 0.95rem;">Equipamiento seleccionado para cada nivel.</p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a routerLink="/catalogo" class="btn btn-accent px-5">Ver catalogo</a>
+        <a routerLink="/register" class="btn btn-ghost px-5">Registrarse</a>
+      </div>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,327 @@
+<div class="sk-section">
+  <div class="container">
+
+    <div class="mb-5">
+      <div class="sk-badge mb-2">Tu pedido</div>
+      <h1 class="text-white fw-bold" style="font-size: 2rem;">Carrito de Compra</h1>
+    </div>
+
+    @if (pagado) {
+      <div class="text-center py-5">
+        <i class="fa-solid fa-circle-check" style="color: #44bb77; font-size: 3.5rem; margin-bottom: 20px; display: block;"></i>
+        <h2 class="text-white fw-bold mb-2">Pedido confirmado</h2>
+        <p style="color: var(--color-muted); margin-bottom: 8px;">Tu setup esta en camino. Recibirás un email con los detalles.</p>
+        <p style="color: #555; font-size: 0.85rem; margin-bottom: 28px;">Gracias por tu compra en SkateSet.</p>
+        <a routerLink="/catalogo" class="btn btn-accent px-5">Seguir comprando</a>
+      </div>
+
+    } @else if (cart.items().length === 0) {
+      <div class="text-center py-5">
+        <i class="fa-solid fa-bag-shopping" style="color: #333; font-size: 3rem; margin-bottom: 16px; display: block;"></i>
+        <h3 class="text-white mb-2">Tu carrito esta vacio</h3>
+        <p style="color: var(--color-muted); margin-bottom: 24px;">Explora el catalogo y anade productos.</p>
+        <a routerLink="/catalogo" class="btn btn-accent px-5">Ver catalogo</a>
+      </div>
+
+    } @else {
+      <div class="row g-4">
+
+        <!-- COL IZQUIERDA: Tabla + Envio -->
+        <div class="col-12 col-lg-7">
+
+          <!-- Tabla carrito -->
+          <div class="sk-card mb-4" style="border-radius: 8px; overflow: hidden;">
+            <table class="table sk-table mb-0">
+              <thead>
+                <tr style="background: var(--color-bg);">
+                  <th style="font-size: 0.75rem; text-transform: uppercase; color: #555; font-weight: 600; padding: 14px 16px;">Producto</th>
+                  <th style="font-size: 0.75rem; text-transform: uppercase; color: #555; font-weight: 600; padding: 14px 8px;">Precio</th>
+                  <th style="font-size: 0.75rem; text-transform: uppercase; color: #555; font-weight: 600; padding: 14px 8px;">Cant.</th>
+                  <th style="font-size: 0.75rem; text-transform: uppercase; color: #555; font-weight: 600; padding: 14px 8px;">Total</th>
+                  <th style="padding: 14px 8px;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (item of cart.items(); track item.producto.id) {
+                  <tr>
+                    <td style="padding: 14px 16px;">
+                      <div class="d-flex align-items-center gap-3">
+                        <img [src]="item.producto.imagen"
+                             style="width: 44px; height: 44px; object-fit: contain; background: var(--color-bg); border-radius: 4px; padding: 4px;"
+                             [alt]="item.producto.nombre">
+                        <div>
+                          <div class="text-white fw-semibold" style="font-size: 0.88rem;">{{ item.producto.nombre }}</div>
+                          <div style="color: #555; font-size: 0.78rem;">{{ item.producto.categoria }}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td style="color: #aaa; font-size: 0.88rem; vertical-align: middle; padding: 14px 8px;">{{ item.producto.precio | number:'1.2-2' }}</td>
+                    <td style="vertical-align: middle; padding: 14px 8px;">
+                      <input type="number" min="1" max="20" [value]="item.cantidad"
+                             (change)="cambiarCantidad(item.producto.id, $event)"
+                             class="sk-input form-control text-center"
+                             style="width: 64px; font-size: 0.85rem; padding: 6px 8px !important;">
+                    </td>
+                    <td style="color: var(--color-text); font-weight: 600; font-size: 0.88rem; vertical-align: middle; padding: 14px 8px;">
+                      {{ (item.producto.precio * item.cantidad) | number:'1.2-2' }}
+                    </td>
+                    <td style="vertical-align: middle; padding: 14px 8px;">
+                      <button class="btn btn-sm" style="color: #555; border: none; background: transparent;"
+                              (click)="quitar(item.producto.id)">
+                        <i class="fa-solid fa-xmark"></i>
+                      </button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+              <tfoot>
+                <tr style="background: var(--color-bg);">
+                  <td colspan="3" style="text-align: right; color: #555; font-size: 0.85rem; font-weight: 600; padding: 14px 16px;">Subtotal</td>
+                  <td style="color: var(--color-text); font-size: 1rem; font-weight: 700; padding: 14px 8px;">{{ cart.total() | number:'1.2-2' }} EUR</td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <a routerLink="/catalogo" style="color: #555; font-size: 0.85rem; text-decoration: none; display: inline-block; margin-bottom: 28px;">
+            <i class="fa-solid fa-arrow-left me-1"></i>Seguir comprando
+          </a>
+
+          <!-- Formulario de Envio -->
+          <div class="sk-card p-4" style="border-radius: 8px;">
+            <h5 class="text-white fw-semibold mb-4" style="font-size: 1rem;">
+              <i class="fa-solid fa-truck me-2" style="color: var(--color-accent);"></i>Datos de Envio
+            </h5>
+            <form [formGroup]="envioForm" novalidate>
+              <div class="row g-3">
+
+                <div class="col-12 col-sm-6">
+                  <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Nombre *</label>
+                  <input type="text" formControlName="nombre" class="sk-input form-control" placeholder="Nombre">
+                  @if (fe['nombre'].invalid && fe['nombre'].touched) {
+                    <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">Nombre requerido.</div>
+                  }
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Apellido *</label>
+                  <input type="text" formControlName="apellido" class="sk-input form-control" placeholder="Apellido">
+                  @if (fe['apellido'].invalid && fe['apellido'].touched) {
+                    <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">Apellido requerido.</div>
+                  }
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Email *</label>
+                  <input type="email" formControlName="email" class="sk-input form-control" placeholder="tu@email.com">
+                  @if (fe['email'].invalid && fe['email'].touched) {
+                    <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">Email invalido.</div>
+                  }
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Telefono *</label>
+                  <input type="tel" formControlName="telefono" class="sk-input form-control" placeholder="+34 600 000 000">
+                  @if (fe['telefono'].invalid && fe['telefono'].touched) {
+                    <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">Telefono invalido.</div>
+                  }
+                </div>
+
+                <div class="col-12">
+                  <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Direccion *</label>
+                  <input type="text" formControlName="direccion" class="sk-input form-control" placeholder="Calle, numero, piso">
+                  @if (fe['direccion'].invalid && fe['direccion'].touched) {
+                    <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">Direccion requerida.</div>
+                  }
+                </div>
+
+                <div class="col-12 col-sm-4">
+                  <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Codigo postal *</label>
+                  <input type="text" formControlName="codigo" class="sk-input form-control" placeholder="12345">
+                  @if (fe['codigo'].invalid && fe['codigo'].touched) {
+                    <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">Requerido.</div>
+                  }
+                </div>
+
+                <div class="col-12 col-sm-4">
+                  <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Ciudad *</label>
+                  <input type="text" formControlName="ciudad" class="sk-input form-control" placeholder="Ciudad">
+                  @if (fe['ciudad'].invalid && fe['ciudad'].touched) {
+                    <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">Requerido.</div>
+                  }
+                </div>
+
+                <div class="col-12 col-sm-4">
+                  <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Pais *</label>
+                  <select formControlName="pais" class="sk-input form-select">
+                    <option value="">Seleccionar</option>
+                    <option>Espana</option>
+                    <option>Mexico</option>
+                    <option>Argentina</option>
+                    <option>Colombia</option>
+                    <option>Chile</option>
+                    <option>Peru</option>
+                    <option>Otro</option>
+                  </select>
+                  @if (fe['pais'].invalid && fe['pais'].touched) {
+                    <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">Requerido.</div>
+                  }
+                </div>
+
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+        <!-- COL DERECHA: Metodo de pago + Resumen -->
+        <div class="col-12 col-lg-5">
+          <div class="sk-card p-4 mb-4" style="border-radius: 8px;">
+            <h5 class="text-white fw-semibold mb-4" style="font-size: 1rem;">
+              <i class="fa-solid fa-credit-card me-2" style="color: var(--color-accent);"></i>Metodo de Pago
+            </h5>
+
+            <!-- Selector de metodo -->
+            <div class="d-flex gap-2 mb-4">
+              <button class="btn btn-sm flex-grow-1"
+                      [style.border]="metodoPago === 'tarjeta' ? '1px solid var(--color-accent)' : '1px solid #2a2a2a'"
+                      [style.color]="metodoPago === 'tarjeta' ? 'var(--color-accent)' : '#555'"
+                      [style.background]="metodoPago === 'tarjeta' ? 'rgba(232,255,0,0.06)' : 'transparent'"
+                      (click)="setMetodo('tarjeta')" style="border-radius: 6px; font-size: 0.82rem;">
+                <i class="fa-solid fa-credit-card me-1"></i>Tarjeta
+              </button>
+              <button class="btn btn-sm flex-grow-1"
+                      [style.border]="metodoPago === 'paypal' ? '1px solid var(--color-accent)' : '1px solid #2a2a2a'"
+                      [style.color]="metodoPago === 'paypal' ? 'var(--color-accent)' : '#555'"
+                      [style.background]="metodoPago === 'paypal' ? 'rgba(232,255,0,0.06)' : 'transparent'"
+                      (click)="setMetodo('paypal')" style="border-radius: 6px; font-size: 0.82rem;">
+                <i class="fa-brands fa-paypal me-1"></i>PayPal
+              </button>
+              <button class="btn btn-sm flex-grow-1"
+                      [style.border]="metodoPago === 'transferencia' ? '1px solid var(--color-accent)' : '1px solid #2a2a2a'"
+                      [style.color]="metodoPago === 'transferencia' ? 'var(--color-accent)' : '#555'"
+                      [style.background]="metodoPago === 'transferencia' ? 'rgba(232,255,0,0.06)' : 'transparent'"
+                      (click)="setMetodo('transferencia')" style="border-radius: 6px; font-size: 0.82rem;">
+                <i class="fa-solid fa-building-columns me-1"></i>Banco
+              </button>
+            </div>
+
+            <!-- Formulario Tarjeta -->
+            @if (metodoPago === 'tarjeta') {
+              <form [formGroup]="pagoForm" novalidate>
+                <div class="d-flex flex-column gap-3">
+                  <div>
+                    <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Nombre en la tarjeta</label>
+                    <input type="text" formControlName="titular" class="sk-input form-control" placeholder="Como aparece en la tarjeta">
+                    @if (fp['titular'].invalid && fp['titular'].touched) {
+                      <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">Requerido.</div>
+                    }
+                  </div>
+                  <div>
+                    <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Numero de tarjeta</label>
+                    <input type="text" formControlName="tarjeta" class="sk-input form-control" placeholder="0000 0000 0000 0000" maxlength="16">
+                    @if (fp['tarjeta'].invalid && fp['tarjeta'].touched) {
+                      <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">16 digitos requeridos.</div>
+                    }
+                  </div>
+                  <div class="row g-2">
+                    <div class="col-7">
+                      <label style="font-size: 0.75rem; color: #555; margin-bottom: 6px; display: block;">Vencimiento</label>
+                      <input type="text" formControlName="expiry" class="sk-input form-control" placeholder="MM/AA">
+                      @if (fp['expiry'].invalid && fp['expiry'].touched) {
+                        <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">Formato MM/AA.</div>
+                      }
+                    </div>
+                    <div class="col-5">
+                      <label style="font-size: 0.75rem; color: #555; margin-bottom: 6px; display: block;">CVV</label>
+                      <input type="text" formControlName="cvv" class="sk-input form-control" placeholder="123" maxlength="4">
+                      @if (fp['cvv'].invalid && fp['cvv'].touched) {
+                        <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">3-4 dig.</div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </form>
+            }
+
+            <!-- PayPal -->
+            @if (metodoPago === 'paypal') {
+              <div style="background: #0d2137; border: 1px solid #1a3a5c; border-radius: 8px; padding: 20px; text-align: center;">
+                <i class="fa-brands fa-paypal" style="font-size: 2.5rem; color: #009cde; margin-bottom: 12px; display: block;"></i>
+                <p style="color: #aaa; font-size: 0.88rem; margin-bottom: 8px;">Seras redirigido a PayPal para completar tu pago de forma segura.</p>
+                <p style="color: #555; font-size: 0.8rem; margin: 0;">
+                  <i class="fa-solid fa-shield-halved me-1" style="color: #009cde;"></i>Pago protegido por PayPal
+                </p>
+              </div>
+            }
+
+            <!-- Transferencia -->
+            @if (metodoPago === 'transferencia') {
+              <div style="background: #0d1a0d; border: 1px solid #1a3a1a; border-radius: 8px; padding: 20px;">
+                <p style="color: #aaa; font-size: 0.88rem; margin-bottom: 12px;">Realiza una transferencia bancaria con los siguientes datos:</p>
+                <div class="d-flex flex-column gap-2">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                    <span style="color: #555;">Banco:</span>
+                    <span style="color: #ccc;">SkateSet Bank</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                    <span style="color: #555;">IBAN:</span>
+                    <span style="color: #ccc; font-family: monospace;">ES12 3456 7890 1234 5678</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                    <span style="color: #555;">Concepto:</span>
+                    <span style="color: var(--color-accent);">PEDIDO-{{ cart.cantidad() }}prd</span>
+                  </div>
+                </div>
+                <p style="color: #555; font-size: 0.78rem; margin-top: 12px; margin-bottom: 0;">
+                  <i class="fa-solid fa-info-circle me-1"></i>El pedido se procesara al recibir el pago (1-2 dias habiles).
+                </p>
+              </div>
+            }
+
+          </div>
+
+          <!-- Resumen del pedido -->
+          <div class="sk-card p-4" style="border-radius: 8px;">
+            <h5 class="text-white fw-semibold mb-4" style="font-size: 1rem;">Resumen</h5>
+            <div class="d-flex flex-column gap-2 mb-3">
+              <div class="d-flex justify-content-between" style="font-size: 0.88rem;">
+                <span style="color: #555;">Subtotal ({{ cart.cantidad() }} productos)</span>
+                <span style="color: #aaa;">{{ cart.total() | number:'1.2-2' }} EUR</span>
+              </div>
+              <div class="d-flex justify-content-between" style="font-size: 0.88rem;">
+                <span style="color: #555;">Envio</span>
+                <span style="color: #44bb77;">Gratis</span>
+              </div>
+              <div class="d-flex justify-content-between" style="font-size: 0.88rem;">
+                <span style="color: #555;">Impuestos (21%)</span>
+                <span style="color: #aaa;">{{ (cart.total() * 0.21) | number:'1.2-2' }} EUR</span>
+              </div>
+            </div>
+            <div style="border-top: 1px solid #222; padding-top: 12px; margin-bottom: 20px;">
+              <div class="d-flex justify-content-between">
+                <span class="text-white fw-bold">Total</span>
+                <span class="text-white fw-bold" style="font-size: 1.1rem;">{{ (cart.total() * 1.21) | number:'1.2-2' }} EUR</span>
+              </div>
+            </div>
+
+            <button class="btn btn-accent w-100 py-2" [disabled]="procesando" (click)="pagar()">
+              @if (procesando) {
+                <span class="spinner-border spinner-border-sm me-2"></span>Procesando...
+              } @else {
+                <i class="fa-solid fa-lock me-2" style="font-size: 0.85rem;"></i>Confirmar pedido
+              }
+            </button>
+
+            <p style="color: #444; font-size: 0.75rem; text-align: center; margin-top: 12px; margin-bottom: 0;">
+              <i class="fa-solid fa-shield-halved me-1"></i>Pago 100% seguro y encriptado
+            </p>
+          </div>
+
+        </div>
+      </div>
+    }
+
+  </div>
+</div>

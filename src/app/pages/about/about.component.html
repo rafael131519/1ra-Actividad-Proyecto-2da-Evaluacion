@@ -1,0 +1,168 @@
+<div>
+
+  <!-- HERO ABOUT -->
+  <section style="background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 80px 0 60px;">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="sk-badge mb-3">Quienes Somos</div>
+          <h1 class="text-white fw-bold mb-4" style="font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15;">
+            Mas que una tienda.<br><span style="color: var(--color-accent);">Una cultura.</span>
+          </h1>
+          <p style="color: #aaa; font-size: 0.95rem; line-height: 1.8; margin-bottom: 16px;">
+            SkateSet nacio en los callejones de Shibuya en 2019 con una idea simple: ofrecer equipamiento de skate de calidad profesional, sin intermediarios, directo a quien lo necesita.
+          </p>
+          <p style="color: #aaa; font-size: 0.95rem; line-height: 1.8; margin-bottom: 32px;">
+            No somos solo una tienda. Somos skaters que entienden lo que significa encontrar el setup perfecto. Cada producto de nuestro catalogo ha sido probado en las calles, no en una sala de reuniones.
+          </p>
+          <div class="d-flex gap-4 flex-wrap">
+            <div>
+              <div class="fw-bold text-white" style="font-size: 1.8rem; font-family: var(--font-title);">2019</div>
+              <div style="color: #555; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Fundacion</div>
+            </div>
+            <div>
+              <div class="fw-bold text-white" style="font-size: 1.8rem; font-family: var(--font-title);">30+</div>
+              <div style="color: #555; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Paises</div>
+            </div>
+            <div>
+              <div class="fw-bold text-white" style="font-size: 1.8rem; font-family: var(--font-title);">500+</div>
+              <div style="color: #555; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Productos</div>
+            </div>
+            <div>
+              <div class="fw-bold text-white" style="font-size: 1.8rem; font-family: var(--font-title);">2K+</div>
+              <div style="color: #555; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Clientes</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; height: 420px;">
+            <div style="background: url('assets/img/raphael-lopes-ssuecuRdR7s-unsplash.jpg') center/cover; border-radius: 8px; grid-row: span 2;"></div>
+            <div style="background: url('assets/img/sora-sagano-ibIqYtrxXds-unsplash.jpg') center/cover; border-radius: 8px;"></div>
+            <div style="background: url('assets/img/valentin-beauvais-yVUQlyRlJSw-unsplash.jpg') center/cover; border-radius: 8px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISION / VISION -->
+  <section class="sk-section" style="border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-12 col-md-6">
+          <div class="sk-card p-4 h-100" style="border-radius: 8px; border-left: 3px solid var(--color-accent);">
+            <div style="width: 40px; height: 40px; background: var(--color-accent-dim); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <i class="fa-solid fa-bullseye" style="color: var(--color-accent); font-size: 1rem;"></i>
+            </div>
+            <h3 class="text-white fw-bold mb-3" style="font-size: 1.2rem;">Nuestra Mision</h3>
+            <p style="color: #aaa; font-size: 0.92rem; line-height: 1.75; margin: 0;">
+              Conectar a cada skater con el equipamiento que necesita para progresar, independientemente de su nivel o ubicacion. Creemos que el acceso a material de calidad no deberia ser un privilegio.
+            </p>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="sk-card p-4 h-100" style="border-radius: 8px; border-left: 3px solid #00a8ff;">
+            <div style="width: 40px; height: 40px; background: rgba(0,168,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <i class="fa-solid fa-eye" style="color: #00a8ff; font-size: 1rem;"></i>
+            </div>
+            <h3 class="text-white fw-bold mb-3" style="font-size: 1.2rem;">Nuestra Vision</h3>
+            <p style="color: #aaa; font-size: 0.92rem; line-height: 1.75; margin: 0;">
+              Ser la referencia global del equipamiento de skate, reconocidos no solo por la calidad de nuestros productos sino por el impacto positivo que generamos en la comunidad mundial del skateboarding.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALORES -->
+  <section class="sk-section" style="background: var(--color-surface); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="sk-badge mb-3">Lo que nos define</div>
+        <h2 class="text-white fw-bold" style="font-size: 1.8rem;">Nuestros Valores</h2>
+      </div>
+      <div class="row g-4">
+        @for (v of valores; track v.titulo) {
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="sk-card p-4 h-100 text-center" style="border-radius: 8px;">
+              <div style="width: 52px; height: 52px; background: var(--color-accent-dim); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                <i [class]="v.icono" style="color: var(--color-accent); font-size: 1.1rem;"></i>
+              </div>
+              <h5 class="text-white fw-semibold mb-2" style="font-size: 0.95rem;">{{ v.titulo }}</h5>
+              <p style="color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0;">{{ v.desc }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPO -->
+  <section class="sk-section" style="border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="sk-badge mb-3">Las personas detras</div>
+        <h2 class="text-white fw-bold" style="font-size: 1.8rem;">Nuestro Equipo</h2>
+        <p style="color: #555; font-size: 0.9rem; margin-top: 8px;">Skaters que trabajan para skaters</p>
+      </div>
+      <div class="row g-4 justify-content-center">
+        @for (m of equipo; track m.nombre) {
+          <div class="col-12 col-md-4">
+            <div class="sk-card p-4 text-center h-100" style="border-radius: 8px;">
+              <img [src]="m.img" [alt]="m.nombre"
+                   style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; display: block; border: 2px solid var(--color-border);">
+              <h5 class="text-white fw-bold mb-1" style="font-size: 1rem;">{{ m.nombre }}</h5>
+              <div class="sk-badge mb-3 d-inline-block">{{ m.rol }}</div>
+              <p style="color: #666; font-size: 0.83rem; line-height: 1.6; margin-bottom: 12px;">{{ m.bio }}</p>
+              <div style="color: #444; font-size: 0.78rem;">
+                <i class="fa-solid fa-location-dot me-1"></i>{{ m.ciudad }}
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORIA / TIMELINE -->
+  <section class="sk-section" style="background: var(--color-surface); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="sk-badge mb-3">Nuestra historia</div>
+        <h2 class="text-white fw-bold" style="font-size: 1.8rem;">El Camino Recorrido</h2>
+      </div>
+      <div style="max-width: 640px; margin: 0 auto; position: relative;">
+        <!-- Linea vertical -->
+        <div style="position: absolute; left: 16px; top: 8px; bottom: 8px; width: 1px; background: var(--color-border);"></div>
+        <div class="d-flex flex-column gap-4">
+          @for (h of hitos; track h.anio) {
+            <div class="d-flex gap-4 align-items-start">
+              <div style="min-width: 33px; height: 33px; border-radius: 50%; background: var(--color-bg); border: 2px solid var(--color-accent); display: flex; align-items: center; justify-content: center; z-index: 1; flex-shrink: 0;">
+                <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent);"></div>
+              </div>
+              <div class="sk-card p-3 flex-grow-1" style="border-radius: 8px;">
+                <div style="color: var(--color-accent); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 4px;">{{ h.anio }}</div>
+                <div class="text-white fw-semibold" style="font-size: 0.92rem; margin-bottom: 4px;">{{ h.evento }}</div>
+                <div style="color: #666; font-size: 0.82rem;">{{ h.desc }}</div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="sk-section-sm" style="border-top: 1px solid var(--color-border);">
+    <div class="container text-center">
+      <h2 class="text-white fw-bold mb-2" style="font-size: 1.5rem;">Forma parte de la comunidad</h2>
+      <p style="color: var(--color-muted); margin-bottom: 24px; font-size: 0.92rem;">Explora nuestro catalogo o contactanos directamente.</p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a routerLink="/catalogo" class="btn btn-accent px-5">Ver catalogo</a>
+        <a routerLink="/contacto" class="btn btn-ghost px-5">Contactar</a>
+      </div>
+    </div>
+  </section>
+
+</div>

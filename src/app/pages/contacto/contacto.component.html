@@ -1,0 +1,133 @@
+<div class="sk-section">
+  <div class="container">
+    <div class="row g-5">
+
+      <!-- Info -->
+      <div class="col-12 col-lg-5">
+        <div class="sk-badge mb-3">Contacto</div>
+        <h1 class="text-white fw-bold mb-3" style="font-size: 2rem;">Hablemos</h1>
+        <p style="color: #aaa; font-size: 0.93rem; line-height: 1.7; margin-bottom: 32px;">
+          Tienes dudas sobre algun producto, tu pedido o quieres colaborar con nosotros? Escribenos y te respondemos en menos de 24h.
+        </p>
+
+        <div class="d-flex flex-column gap-4 mb-5">
+          <div class="d-flex gap-3 align-items-start">
+            <div style="width: 36px; height: 36px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i class="fa-solid fa-location-dot" style="color: var(--color-muted); font-size: 0.85rem;"></i>
+            </div>
+            <div>
+              <div class="text-white fw-semibold" style="font-size: 0.88rem;">Ubicacion</div>
+              <div style="color: var(--color-muted); font-size: 0.85rem;">Shibuya, Tokyo JP 150-0042</div>
+            </div>
+          </div>
+          <div class="d-flex gap-3 align-items-start">
+            <div style="width: 36px; height: 36px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i class="fa-solid fa-envelope" style="color: var(--color-muted); font-size: 0.85rem;"></i>
+            </div>
+            <div>
+              <div class="text-white fw-semibold" style="font-size: 0.88rem;">Email</div>
+              <div style="color: var(--color-muted); font-size: 0.85rem;">soporte&#64;skateset.jp</div>
+            </div>
+          </div>
+          <div class="d-flex gap-3 align-items-start">
+            <div style="width: 36px; height: 36px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i class="fa-solid fa-clock" style="color: var(--color-muted); font-size: 0.85rem;"></i>
+            </div>
+            <div>
+              <div class="text-white fw-semibold" style="font-size: 0.88rem;">Horario</div>
+              <div style="color: var(--color-muted); font-size: 0.85rem;">Lunes a Viernes, 9:00 - 20:00 JST</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #444; margin-bottom: 12px;">Redes sociales</p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="https://instagram.com" target="_blank" class="btn btn-ghost btn-sm" style="font-size: 0.82rem;">
+              <i class="fa-brands fa-instagram me-1"></i>Instagram
+            </a>
+            <a href="https://tiktok.com" target="_blank" class="btn btn-ghost btn-sm" style="font-size: 0.82rem;">
+              <i class="fa-brands fa-tiktok me-1"></i>TikTok
+            </a>
+            <a href="https://discord.com" target="_blank" class="btn btn-ghost btn-sm" style="font-size: 0.82rem;">
+              <i class="fa-brands fa-discord me-1"></i>Discord
+            </a>
+            <a href="https://youtube.com" target="_blank" class="btn btn-ghost btn-sm" style="font-size: 0.82rem;">
+              <i class="fa-brands fa-youtube me-1"></i>YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <div class="col-12 col-lg-7">
+        <div class="sk-card p-4 p-md-5" style="border-radius: 8px;">
+
+          @if (enviado) {
+            <div class="text-center py-4">
+              <i class="fa-solid fa-circle-check" style="color: #44bb77; font-size: 2.5rem; margin-bottom: 16px; display: block;"></i>
+              <h4 class="text-white fw-bold mb-2">Mensaje enviado</h4>
+              <p style="color: var(--color-muted); font-size: 0.9rem; margin-bottom: 20px;">Te responderemos en menos de 24 horas.</p>
+              <button class="btn btn-ghost btn-sm" (click)="enviado = false">Enviar otro mensaje</button>
+            </div>
+
+          } @else {
+            <h5 class="text-white fw-semibold mb-4" style="font-size: 1rem;">Enviar mensaje</h5>
+
+            <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+              <div class="row g-3">
+
+                <div class="col-12 col-sm-6">
+                  <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Nombre</label>
+                  <input type="text" formControlName="nombre" class="sk-input form-control" placeholder="Tu nombre">
+                  @if (f['nombre'].invalid && f['nombre'].touched) {
+                    <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">Minimo 3 caracteres.</div>
+                  }
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Email</label>
+                  <input type="email" formControlName="email" class="sk-input form-control" placeholder="tu@email.com">
+                  @if (f['email'].invalid && f['email'].touched) {
+                    <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">Email invalido.</div>
+                  }
+                </div>
+
+                <div class="col-12">
+                  <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Asunto</label>
+                  <select formControlName="asunto" class="sk-input form-select">
+                    <option>Soporte tecnico</option>
+                    <option>Pedidos y envios</option>
+                    <option>Colaboraciones</option>
+                    <option>Consulta general</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; display: block;">Mensaje</label>
+                  <textarea formControlName="mensaje" class="sk-input form-control" rows="5" placeholder="Escribe tu mensaje aqui..."></textarea>
+                  @if (f['mensaje'].invalid && f['mensaje'].touched) {
+                    <div style="color: var(--color-danger); font-size: 0.78rem; margin-top: 4px;">Minimo 20 caracteres.</div>
+                  }
+                </div>
+
+                <div class="col-12 mt-1">
+                  <button type="submit" class="btn btn-accent w-100 py-2" [disabled]="enviando">
+                    @if (enviando) {
+                      <span class="spinner-border spinner-border-sm me-2"></span>Enviando...
+                    } @else {
+                      Enviar mensaje
+                    }
+                  </button>
+                </div>
+
+              </div>
+            </form>
+          }
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
